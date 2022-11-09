@@ -2,7 +2,7 @@ import { CliParam } from "./cli-param";
 
 export interface CliParametrized{
     /**
-     * Parameters
+     * Parameter
      */
     param?: CliParam
 }

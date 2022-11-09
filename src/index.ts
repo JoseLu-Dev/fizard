@@ -3,10 +3,10 @@
 const chalk = require('chalk')
 const clear = require('clear')
 const figlet = require('figlet')
-import commander from 'commander'
+const { Command  } = require('commander')
 import { CommanderAdapter } from './adapters/commanderAdapter'
 
-const program: commander.Command = new commander.Command()
+const program = new Command()
 
 clear()
 console.log(

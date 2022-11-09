@@ -22,5 +22,7 @@ export interface CliOption extends CliParametrized{
      */
     description: string
 
+    defaultValue?: string | boolean
+
     action: () => void
 }
