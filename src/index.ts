@@ -3,10 +3,10 @@
 const chalk = require('chalk')
 const clear = require('clear')
 const figlet = require('figlet')
-const { Command  } = require('commander')
-import { CommanderAdapter } from './adapters/commanderAdapter'
+import { Command } from '@commander-js/extra-typings';
+import { CommandMediator } from './commands/commandMediator';
 
-const program = new Command()
+const program: Command = new Command()
 
 clear()
 console.log(
@@ -16,40 +16,11 @@ console.log(
 )
 
 program
-  .version('0.0.1')
-  .description("File-folder utilities")
+  .description('A cli files/folder utilities program')
 
-
-const adapter = new CommanderAdapter(program)
-
-adapter.addCommand({
-  name: "loc",
-  description: "shows the current location",
-  param:
-  {
-    name: "extra",
-    optional: true
-  },
-  options: [
-    {
-      name: "--alphabetized",
-      nameAbbreviated: "-a",
-      description: "Modifies the output",
-      param:
-      {
-        name: "beta",
-        optional: true
-      },
-      action: ()=>{}
-    }
-  ],
-  action: (param, options) => {
-    console.log("----------------------------NAME: -------------------------------")
-    console.log(param)
-    console.log("----------------------------OPTIONS: ----------------------------")
-    console.log(options)
-    console.log(process.cwd())
-  }
-})
+new CommandMediator().mediate(program)
 
 program.parse(process.argv)
+
+console.log(program.commands)
+console.log(process.cwd())
