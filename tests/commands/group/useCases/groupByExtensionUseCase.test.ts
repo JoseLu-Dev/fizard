@@ -3,7 +3,7 @@ import { GroupByFileExtensionUseCase } from "../../../../src/commands/group/useC
 
 const files = [
     {
-        pathCurrent: 'downloads/example.mp4',
+        pathCurrent: 'downloads\\example.mp4',
     }
 ] as Array<File>
 
@@ -15,7 +15,7 @@ describe('group', () => {
         groupByFileExtension.group(files)
         
         files.forEach(element => {
-          expect(element.pathNew?.match(/.*\/video\/[^/]*\.mp4/)).toHaveLength(1)
+          expect(element.pathNew?.match(/.*\\video\\[^/]*\.mp4/)).toHaveLength(1)
         })
     })
 
