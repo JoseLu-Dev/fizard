@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import 'reflect-metadata';
 
 const chalk = require('chalk')
 const clear = require('clear')
