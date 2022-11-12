@@ -1,9 +1,14 @@
+import { Service } from "typedi";
+
 import { GroupOptions } from "./groupOptions";
+import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseCase";
 
-export class GroupFiles{
-    //useCases
+@Service()
+export class GroupFiles {
 
-    performGroup(options: GroupOptions){
+    constructor(private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase) { }
+
+    performGroup(path: string, options: GroupOptions) {
 
     }
 }

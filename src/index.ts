@@ -1,11 +1,13 @@
 #!/usr/bin/env node
-import 'reflect-metadata';
+import 'reflect-metadata'
 
 const chalk = require('chalk')
 const clear = require('clear')
 const figlet = require('figlet')
-import { Command } from '@commander-js/extra-typings';
-import { CommandMediator } from './commands/commandMediator';
+import { Command } from '@commander-js/extra-typings'
+import { Container } from 'typedi'
+
+import { CommandMediator } from './commands/commandMediator'
 
 const program: Command = new Command()
 
@@ -19,9 +21,6 @@ console.log(
 program
   .description('A cli files/folder utilities program')
 
-new CommandMediator().mediate(program)
+Container.get(CommandMediator).mediate(program)
 
 program.parse(process.argv)
-
-console.log(program.commands)
-console.log(process.cwd())
