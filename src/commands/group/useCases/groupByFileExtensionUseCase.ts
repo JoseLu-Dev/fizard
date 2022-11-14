@@ -1,7 +1,7 @@
 import { Service } from "typedi"
 
-import { File } from "../../../common/file"
-import { FilePathUtils } from "../../../common/filePathUtils"
+import { FileWrapper } from "../../../common/fileWrapper"
+import { FilePathUtils } from "../../../common/utils/filePathUtils"
 
 @Service()
 export class GroupByFileExtensionUseCase {
@@ -17,13 +17,13 @@ export class GroupByFileExtensionUseCase {
 
     constructor(private readonly _filePathUtils: FilePathUtils) { }
 
-    group(files: Array<File>): void {
+    group(files: Array<FileWrapper>): void {
         files.forEach(file => {
             this._moveFileToItsFolder(file)
         })
     }
 
-    private _moveFileToItsFolder(file: File): void {
+    private _moveFileToItsFolder(file: FileWrapper): void {
         if (!file.pathCurrent) return
 
         let fileExtension: RegExpMatchArray | null | undefined = file.pathCurrent.match(this.REGEX_FILE_EXTENSION)

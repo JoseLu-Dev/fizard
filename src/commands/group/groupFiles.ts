@@ -1,14 +1,39 @@
-import { Service } from "typedi";
+import { Service } from "typedi"
 
-import { GroupOptions } from "./groupOptions";
-import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseCase";
+import { GroupOptions } from "./groupOptions"
+import { FileWrapper } from "../../common/fileWrapper"
+import { GetFilesWithPropertiesUseCase } from "../../common/useCases/getFilesWithPropertiesUseCase"
+import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseCase"
+import { MoveFileUseCase } from "../../common/useCases/moveFileUseCase"
 
 @Service()
 export class GroupFiles {
 
-    constructor(private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase) { }
+    readonly options = {
+        extension: this._groupByFileExtensionUseCase
+    }
 
-    performGroup(path: string, options: GroupOptions) {
+    constructor(
+        private readonly _getFilesMetadataUseCase: GetFilesWithPropertiesUseCase,
+        private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
+        private readonly _moveFileUseCase: MoveFileUseCase,
+    ) { }
 
+    async performGroup(path: string, options: GroupOptions) {
+
+        const files: Array<FileWrapper> = await this._getFilesMetadataUseCase.getList(path)
+
+        this._groupForEachOption(options, files)
+
+        this._moveFileUseCase.move(files)
+    }
+
+    private _groupForEachOption(options: GroupOptions, files: Array<FileWrapper>){
+
+        type ObjectKey = keyof typeof this.options
+
+        for (const option in options) {
+            this.options[option as ObjectKey].group(files)
+        }
     }
 }
