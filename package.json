@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@commander-js/extra-typings": "^9.4.1",
+    "@types/fs-extra": "^9.0.13",
     "@types/jest": "^29.2.0",
     "@types/node": "^14.14.33",
     "jest": "^29.2.2",
