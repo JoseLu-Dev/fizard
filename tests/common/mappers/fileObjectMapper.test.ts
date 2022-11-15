@@ -15,6 +15,7 @@ describe('fromPathList', () => {
 
         filesFiltered.forEach((file, index) => {
             expect(file.pathCurrent).toBe(pathList[index])
+            expect(file.pathNew).toBe(pathList[index])
         })
     })
 

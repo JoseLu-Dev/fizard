@@ -5,7 +5,7 @@ import { FileWrapper } from "../fileWrapper";
 export class FileObjectMapper {
 
     fromPathList(filePaths: Array<string>): Array<FileWrapper> {
-        return filePaths.map(filePath => new FileWrapper({ pathCurrent: filePath }))
+        return filePaths.map(filePath => new FileWrapper({ pathCurrent: filePath, pathNew: filePath }))
     }
 
 }
