@@ -5,17 +5,20 @@ import { FileWrapper } from "../../common/fileWrapper"
 import { GetFilesWithPropertiesUseCase } from "../../common/useCases/getFilesWithPropertiesUseCase"
 import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseCase"
 import { MoveFileUseCase } from "../../common/useCases/moveFileUseCase"
+import { GroupByFileDateCreatedUseCase } from "./useCases/groupByFileDateCreatedUseCase"
 
 @Service()
 export class GroupFiles {
 
     readonly options = {
-        extension: this._groupByFileExtensionUseCase
+        extension: this._groupByFileExtensionUseCase,
+        dateCreated: this._groupByFileDateCreatedUseCase,
     }
 
     constructor(
         private readonly _getFilesMetadataUseCase: GetFilesWithPropertiesUseCase,
         private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
+        private readonly _groupByFileDateCreatedUseCase: GroupByFileDateCreatedUseCase,
         private readonly _moveFileUseCase: MoveFileUseCase,
     ) { }
 
