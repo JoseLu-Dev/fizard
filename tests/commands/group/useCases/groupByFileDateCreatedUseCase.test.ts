@@ -42,6 +42,8 @@ describe('group', () => {
             }
         ]
 
+        mockedMoveFileToNewFolder.mockReset()
+
         groupByFileExtension.group(files)
 
         expect(mockedMoveFileToNewFolder).toHaveBeenCalledWith('downloads\\example.mp4', 'no-date')
