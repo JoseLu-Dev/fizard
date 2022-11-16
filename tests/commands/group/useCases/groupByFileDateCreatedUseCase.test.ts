@@ -33,4 +33,18 @@ describe('group', () => {
         expect(files[0].pathNew).toBe('downloads\\2022-11-3\\example.mp4')
     })
 
+    it('moves files to a no-date when FileWrapper has no stats', async () => {
+
+        const files = [
+            {
+                pathCurrent: 'downloads\\example.mp4',
+                pathNew: 'downloads\\example.mp4'
+            }
+        ]
+
+        groupByFileExtension.group(files)
+
+        expect(mockedMoveFileToNewFolder).toHaveBeenCalledWith('downloads\\example.mp4', 'no-date')
+    })
+
 })

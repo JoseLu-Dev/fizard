@@ -16,16 +16,14 @@ export class GroupByFileDateCreatedUseCase {
 
     private _moveFileToItsFolder(file: FileWrapper): void {
 
-        if (!file.pathNew || !file.stats) return
-
-       const folder = this._getFolderFromFileDate(file)
+        const folder = this._getFolderFromFileDate(file)
 
         file.pathNew = this._filePathUtils.moveFileToNewFolder(file.pathNew, folder)
     }
 
-    private _getFolderFromFileDate(file: FileWrapper): string{
-        
-        if(!file.stats) return ''
+    private _getFolderFromFileDate(file: FileWrapper): string {
+
+        if(!file.stats) return 'no-date'
 
         const modifiedTime: Date = file.stats.mtime
         return `${modifiedTime.getFullYear()}-${modifiedTime.getMonth() + 1}-${modifiedTime.getDate()}`
