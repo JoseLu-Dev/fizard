@@ -6,7 +6,7 @@ jest.mock('fs-extra', () => ({
 import { CreateDir } from "../../../../../src/common/fs/write/createDir"
 const createDir: CreateDir = new CreateDir()
 
-describe('list', () => {
+describe('create', () => {
     
     it('calls ensureDir method with given dir path', async () => {
         

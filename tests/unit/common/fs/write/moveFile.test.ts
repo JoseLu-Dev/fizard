@@ -6,7 +6,7 @@ jest.mock('fs-extra', () => ({
 import { MoveFile } from "../../../../../src/common/fs/write/moveFile"
 const moveFile: MoveFile = new MoveFile()
 
-describe('list', () => {
+describe('move', () => {
     
     it('return a stats object of the file', async () => {
         
