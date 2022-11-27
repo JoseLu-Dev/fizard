@@ -44,7 +44,7 @@ describe('list', () => {
     it('gets all files and folders in the directory with its stats', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        const files = await getFilesWithStatsUseCase.list(process.cwd(), {})
+        const files = await getFilesWithStatsUseCase.list(process.cwd(), undefined, undefined)
 
         expect(files).toHaveLength(6)
 
@@ -57,7 +57,7 @@ describe('list', () => {
     it('gets all files and folders recursively in the directory', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        const files = await getFilesWithStatsUseCase.list(process.cwd(), { recursive: true })
+        const files = await getFilesWithStatsUseCase.list(process.cwd(), true, undefined)
 
         expect(files).toHaveLength(18)
 
@@ -70,7 +70,7 @@ describe('list', () => {
     it('gets all files and folders in the directory filtered', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        const files = await getFilesWithStatsUseCase.list(process.cwd(), { recursive: true, regex: '\\w+(.avi)$' })
+        const files = await getFilesWithStatsUseCase.list(process.cwd(), true, '\\w+(.avi)$')
 
         files.forEach(file => {
             expect(file.pathCurrentComplete()).toMatch(new RegExp('\\w+(.avi)$'))

@@ -2,7 +2,6 @@ import { Service } from "typedi"
 
 import { FileWrapper } from "../fileWrapper"
 import { RegexFilter } from "../filters/regexFilter"
-import { FindOptions } from "../findOptions"
 import { ListFilesUnderDirectory } from "../fs/read/listFilesUnderDirectory"
 import { ReadFileStats } from "../fs/read/readFileStats"
 
@@ -17,17 +16,17 @@ export class GetFilesWithStatsUseCase {
     ) { }
 
 
-    async list(dir: string, options: FindOptions): Promise<Array<FileWrapper>> {
+    async list(dir: string, recursive?: boolean, regex?: string): Promise<Array<FileWrapper>> {
 
-        let files = await this._getListRecursive(dir, options)
+        let files = await this._getListRecursive(dir, recursive)
 
-        if (options.regex)
-            files = this._regexFilter.filePathCurrent(files, options.regex)
+        if (regex)
+            files = this._regexFilter.filePathCurrent(files, regex)
 
         return files
     }
 
-    private async _getListRecursive(dir: string, options: FindOptions): Promise<Array<FileWrapper>>{
+    private async _getListRecursive(dir: string, recursive?: boolean): Promise<Array<FileWrapper>>{
         const allFiles: FileWrapper[] = []
 
         let fileNames: Array<string> = await this._listFilesUnderDirectory.list(dir)
@@ -35,8 +34,8 @@ export class GetFilesWithStatsUseCase {
         for (const fileName of fileNames) {
             let file: FileWrapper = await this._getWholeFileWrapper(dir, fileName)
 
-            if (options.recursive && file.stats?.isDirectory()) {
-                allFiles.push(...await this.list(file.pathCurrentComplete(), options))
+            if (recursive && file.stats?.isDirectory()) {
+                allFiles.push(...await this._getListRecursive(file.pathCurrentComplete(), recursive))
             }
 
             allFiles.push(file)
