@@ -1,13 +1,13 @@
 import { FileWrapper } from "../fileWrapper"
 import { CommandOptionsBase } from "../commandOptionsBase";
 import { GetFilesWithStatsUseCase } from "../useCases/getFilesWithStatsUseCase";
-import { WriteComputedFiles } from "../useCases/writeComputedFiles";
+import { WriteComputedFilesUseCase } from "../useCases/writeComputedFilesUseCase";
 
-export abstract class CommandBase {
+export abstract class BaseCommand {
 
     constructor(
         private readonly _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
-        private readonly _writeComputedFiles: WriteComputedFiles,
+        private readonly _writeComputedFiles: WriteComputedFilesUseCase,
     ) { }
 
     abstract execute(options: CommandOptionsBase): Promise<void>

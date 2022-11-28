@@ -2,9 +2,9 @@ import { Service } from "typedi"
 
 import { GroupOptions } from "./groupOptions"
 import { FileWrapper } from "../../common/fileWrapper"
-import { GetFilesWithPropertiesUseCase } from "../../common/useCases/getFilesWithPropertiesUseCase"
+import { GetFilesWithStatsUseCase } from "../../common/useCases/getFilesWithStatsUseCase"
 import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseCase"
-import { MoveFileUseCase } from "../../common/useCases/moveFileUseCase"
+import { MoveFileUseCase } from "../../common/fs/write/moveFile"
 import { GroupByFileDateCreatedUseCase } from "./useCases/groupByFileDateCreatedUseCase"
 
 @Service()
@@ -16,7 +16,7 @@ export class GroupFiles {
     }
 
     constructor(
-        private readonly _getFilesMetadataUseCase: GetFilesWithPropertiesUseCase,
+        private readonly _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
         private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
         private readonly _groupByFileDateCreatedUseCase: GroupByFileDateCreatedUseCase,
         private readonly _moveFileUseCase: MoveFileUseCase,
@@ -24,7 +24,7 @@ export class GroupFiles {
 
     async performGroup(path: string, options: GroupOptions) {
 
-        const files: Array<FileWrapper> = await this._getFilesMetadataUseCase.getList(path)
+        const files: Array<FileWrapper> = await this._getFilesMetadataUseCase.list(path)
 
         this._groupForEachOption(options, files)
 

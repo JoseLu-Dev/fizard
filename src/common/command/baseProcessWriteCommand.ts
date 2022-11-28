@@ -1,7 +1,7 @@
 import { CommandOptionsBase } from "../commandOptionsBase";
-import { CommandBase } from "./commandBase";
+import { BaseCommand } from "./baseCommand";
 
-export abstract class CommandProcessWrite extends CommandBase {
+export abstract class BaseProcessWriteCommand extends BaseCommand {
 
     async execute(options: CommandOptionsBase): Promise<void> {
 

@@ -6,7 +6,7 @@ import { CreateFile } from "../fs/write/createFile";
 import { MoveFile } from "../fs/write/moveFile";
 
 @Service()
-export class WriteComputedFiles {
+export class WriteComputedFilesUseCase {
 
     constructor(
         private readonly _createDir: CreateDir,

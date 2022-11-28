@@ -6,9 +6,9 @@ const dirTree = require("directory-tree");
 import { Container } from 'typedi'
 import { FileWrapper } from '../../../../src/common/fileWrapper'
 
-import { WriteComputedFiles } from '../../../../src/common/useCases/writeComputedFiles'
+import { WriteComputedFilesUseCase } from '../../../../src/common/useCases/writeComputedFilesUseCase'
 
-const writeComputedFiles: WriteComputedFiles = Container.get(WriteComputedFiles)
+const writeComputedFiles: WriteComputedFilesUseCase = Container.get(WriteComputedFilesUseCase)
 
 const folderStructure = {
     'video.mp4': '',

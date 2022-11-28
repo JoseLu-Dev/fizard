@@ -1,10 +1,10 @@
 import { FileWrapper } from "../../../../src/common/fileWrapper";
-import { WriteComputedFiles } from "../../../../src/common/useCases/writeComputedFiles"
+import { WriteComputedFilesUseCase } from "../../../../src/common/useCases/writeComputedFilesUseCase"
 
 const createDirMock = jest.fn()
 const createFileMock = jest.fn()
 const moveFileMock = jest.fn()
-const writeComputedFiles = new WriteComputedFiles(
+const writeComputedFiles = new WriteComputedFilesUseCase(
     { create: createDirMock },
     { create: createFileMock },
     { move: moveFileMock },
