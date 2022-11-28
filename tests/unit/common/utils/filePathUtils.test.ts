@@ -1,4 +1,4 @@
-import { FilePathUtils } from "../../../src/common/utils/filePathUtils"
+import { FilePathUtils } from "../../../../src/common/utils/filePathUtils"
 
 const filePathUtils = new FilePathUtils()
 
