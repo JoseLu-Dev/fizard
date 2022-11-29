@@ -1,4 +1,4 @@
-import { ReadFileStats } from "../../../../../src/common/fs/read/readFileStats"
+import { ReadFileStats } from "../../../../../src/common/data/fs/read/readFileStats"
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 

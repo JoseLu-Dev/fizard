@@ -4,7 +4,7 @@ const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 import { Container } from 'typedi'
 
-import { GetFilesWithStatsUseCase } from '../../../../src/common/useCases/getFilesWithStatsUseCase'
+import { GetFilesWithStatsUseCase } from '../../../../src/common/business/useCases/getFilesWithStatsUseCase'
 
 const getFilesWithStatsUseCase: GetFilesWithStatsUseCase = Container.get(GetFilesWithStatsUseCase)
 

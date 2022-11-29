@@ -1,4 +1,4 @@
-import { ListFilesUnderDirectory } from "../../../../../src/common/fs/read/listFilesUnderDirectory"
+import { ListFilesUnderDirectory } from "../../../../../src/common/data/fs/read/listFilesUnderDirectory"
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 

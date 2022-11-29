@@ -7,7 +7,7 @@ const figlet = require('figlet')
 import { Command } from '@commander-js/extra-typings'
 import { Container } from 'typedi'
 
-import { CommandMediator } from './commands/commandMediator'
+import { CommandMediator } from './command/commandMediator'
 
 const program: Command = new Command()
 

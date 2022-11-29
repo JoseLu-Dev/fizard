@@ -4,9 +4,8 @@ const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 const dirTree = require("directory-tree");
 import { Container } from 'typedi'
-import { FileWrapper } from '../../../../src/common/fileWrapper'
 
-import { WriteComputedFilesUseCase } from '../../../../src/common/useCases/writeComputedFilesUseCase'
+import { WriteComputedFilesUseCase } from '../../../../src/common/business/useCases/writeComputedFilesUseCase'
 
 const writeComputedFiles: WriteComputedFilesUseCase = Container.get(WriteComputedFilesUseCase)
 
@@ -19,7 +18,7 @@ describe('write', () => {
     it('modifies or creates folder and file structure', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        const files: FileWrapper[] = [
+        const files = [
             {
                 pathCurrentComplete: () => `${process.cwd()}\\video.mp4`,
                 pathNewComplete: () => `${process.cwd()}\\videos\\video.mp4`
@@ -39,7 +38,7 @@ describe('write', () => {
                     isFile: () => false,
                 }
             }
-        ] as FileWrapper[]
+        ]
         
         
         await writeComputedFiles.write(files)
