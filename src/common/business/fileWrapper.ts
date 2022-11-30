@@ -9,10 +9,12 @@ export class FileWrapper {
 
     stats?: Stats
 
-    constructor(params: { pathCurrent: string, name: string }) {
+    constructor(params: { pathCurrent: string, name: string, isNew?: boolean, stats?: Stats }) {
         this.pathCurrent = params.pathCurrent
         this.pathNew = params.pathCurrent
         this.name = params.name
+        this.isNew = params.isNew
+        this.stats = params.stats
     }
 
     pathCurrentComplete(): string {

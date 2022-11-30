@@ -1,12 +1,11 @@
 import { Service } from "typedi"
 
 import { FileWrapper } from "../../../../common/business/fileWrapper"
-import { FilePathUtils } from "../../../../common/business/utils/filePathUtils"
 
 @Service()
 export class GroupByFileDateCreatedUseCase {
 
-    constructor(private readonly _filePathUtils: FilePathUtils) { }
+    constructor() { }
 
     group(files: Array<FileWrapper>): void {
         files.forEach(file => {
@@ -18,7 +17,7 @@ export class GroupByFileDateCreatedUseCase {
 
         const folder = this._getFolderFromFileDate(file)
 
-        file.pathNew = this._filePathUtils.moveFileToNewFolder(file.pathNew, folder)
+        file.pathNew = `${file.pathNew}\\${folder}`
     }
 
     private _getFolderFromFileDate(file: FileWrapper): string {

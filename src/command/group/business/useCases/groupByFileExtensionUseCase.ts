@@ -1,19 +1,12 @@
 import { Service } from "typedi"
 
 import { FileWrapper } from "../../../../common/business/fileWrapper"
-import { FilePathUtils } from "../../../../common/business/utils/filePathUtils"
+import { MimeType } from "../../../../common/data/mimetype/mimeType"
 
 @Service()
 export class GroupByFileExtensionUseCase {
 
-    private readonly extensionTypes = {
-        video: ['.mp4'],
-        audio: ['.mp3'],
-        image: ['.jpg', '.png'],
-        text: ['.txt']
-    }
-
-    constructor(private readonly _filePathUtils: FilePathUtils) { }
+    constructor(private readonly _mimeType: MimeType) { }
 
     group(files: Array<FileWrapper>): void {
 
@@ -23,22 +16,10 @@ export class GroupByFileExtensionUseCase {
     }
 
     private _moveFileToItsFolder(file: FileWrapper): void {
+        
+        const fileType = this._mimeType.getFileType(file.name)
 
-        const fileExtension: string = this._filePathUtils.getExtensionFromFilePath(file.pathNew)
-
-        let group = this._getFileGroupFromFileExtension(fileExtension)
-
-        file.pathNew = this._filePathUtils.moveFileToNewFolder(file.pathNew, group)
+        file.pathNew = `${file.pathNew}\\${fileType}`
     }
-
-    private _getFileGroupFromFileExtension(fileExtension: string): string {
-
-        for (let [group, groupExtensions] of Object.entries(this.extensionTypes)) {
-            if (groupExtensions.includes(fileExtension)) return group
-        }
-
-        return 'unknown'
-    }
-
 
 }
