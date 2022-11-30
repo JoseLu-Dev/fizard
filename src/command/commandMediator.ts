@@ -23,7 +23,7 @@ export class CommandMediator {
             .option('-d, --date-created', 'By date created')
             .option('-e, --extension', 'By extension type')
             .action((options: GroupOptions) => {
-                this._groupFiles.performGroup(executionPath, options)
+                this._groupFiles.execute({path: executionPath, specificOptions: options})
             })
     }
 }

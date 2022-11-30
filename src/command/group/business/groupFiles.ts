@@ -7,9 +7,11 @@ import { WriteComputedFilesUseCase } from "../../../common/business/useCases/wri
 import { GroupByFileDateCreatedUseCase } from "./useCases/groupByFileDateCreatedUseCase"
 import { FileWrapper } from "../../../common/business/fileWrapper"
 import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
+import { CompleteCommand } from "../../../common/business/command/baseCompleteCommand"
+import { CommandOptions } from "../../../common/business/command/commandOptions"
 
 @Service()
-export class GroupFiles {
+export class GroupFiles extends CompleteCommand {
 
     readonly options = {
         extension: this._groupByFileExtensionUseCase,
@@ -17,25 +19,30 @@ export class GroupFiles {
     }
 
     constructor(
-        private readonly _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
+        _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
+        _writeComputedFilesUseCase: WriteComputedFilesUseCase,
+        private readonly _fileWrapperFilter: FileWrapperFilter,
         private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
         private readonly _groupByFileDateCreatedUseCase: GroupByFileDateCreatedUseCase,
-        private readonly _writeComputedFilesUseCase: WriteComputedFilesUseCase,
-        private readonly _fileWrapperFilter: FileWrapperFilter,
-    ) { }
+    ) {
+        super(
+            _getFilesMetadataUseCase,
+            _writeComputedFilesUseCase
+        )
+    }
 
-    async performGroup(path: string, options: GroupOptions) {
+    protected _process(files: FileWrapper[], options: CommandOptions): Promise<FileWrapper[]> {
 
-        let files: Array<FileWrapper> = await this._getFilesMetadataUseCase.list(path)
+        if(!options.specificOptions) throw new Error('No group options provided')
 
         files = this._fileWrapperFilter.removeDirs(files)
 
-        this._groupForEachOption(options, files)
+        this._groupForEachOption(options.specificOptions, files)
 
-        this._writeComputedFilesUseCase.write(files)
+        return Promise.resolve(files)
     }
 
-    private _groupForEachOption(options: GroupOptions, files: Array<FileWrapper>){
+    private _groupForEachOption(options: GroupOptions, files: Array<FileWrapper>) {
 
         type ObjectKey = keyof typeof this.options
 
