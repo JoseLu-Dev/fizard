@@ -7,11 +7,11 @@
   "scripts": {
     "start": "tsc && node build/index.js",
     "test": "npm run test:unit && npm run test:int && npm run test:e2e",
-    "test:unit": "jest -- --config=jest.config.js --rootDir tests/unit",
+    "test:unit": "jest tests/unit",
     "test:watch": "npm run test:unit -- --watch --rootDir src",
     "test:cov": "npm run test:unit -- --coverage",
-    "test:int": "jest -- --config=jest.config.sequential.js --rootDir tests/integration",
-    "test:e2e": "jest -- --config=jest.config.sequential.js --rootDir tests/e2e",
+    "test:int": "jest tests/integration",
+    "test:e2e": "jest tests/e2e",
     "build": "npx tsc",
     "install-global": "npx tsc && npm install -g ."
   },

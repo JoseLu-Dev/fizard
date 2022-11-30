@@ -169,5 +169,6 @@ module.exports = {
     collectCoverageFrom: [
         '**/*.ts', '!**/*.testing.ts', '!**/*.test.ts'
     ],
+
     coverageDirectory: 'coverage',
 }
