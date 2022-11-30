@@ -6,6 +6,7 @@ import { GroupByFileExtensionUseCase } from "./useCases/groupByFileExtensionUseC
 import { WriteComputedFilesUseCase } from "../../../common/business/useCases/writeComputedFilesUseCase"
 import { GroupByFileDateCreatedUseCase } from "./useCases/groupByFileDateCreatedUseCase"
 import { FileWrapper } from "../../../common/business/fileWrapper"
+import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
 
 @Service()
 export class GroupFiles {
@@ -20,11 +21,14 @@ export class GroupFiles {
         private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
         private readonly _groupByFileDateCreatedUseCase: GroupByFileDateCreatedUseCase,
         private readonly _writeComputedFilesUseCase: WriteComputedFilesUseCase,
+        private readonly _fileWrapperFilter: FileWrapperFilter,
     ) { }
 
     async performGroup(path: string, options: GroupOptions) {
 
-        const files: Array<FileWrapper> = await this._getFilesMetadataUseCase.list(path)
+        let files: Array<FileWrapper> = await this._getFilesMetadataUseCase.list(path)
+
+        files = this._fileWrapperFilter.removeDirs(files)
 
         this._groupForEachOption(options, files)
 
