@@ -7,11 +7,11 @@ import { WriteComputedFilesUseCase } from "../../../common/business/useCases/wri
 import { GroupByFileDateCreatedUseCase } from "./useCases/groupByFileDateCreatedUseCase"
 import { FileWrapper } from "../../../common/business/fileWrapper"
 import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
-import { CompleteCommand } from "../../../common/business/command/baseCompleteCommand"
+import { CommandComplete } from "../../../common/business/command/commandComplete"
 import { CommandOptions } from "../../../common/business/command/commandOptions"
 
 @Service()
-export class GroupFiles extends CompleteCommand {
+export class GroupFiles extends CommandComplete {
 
     readonly options = {
         extension: this._groupByFileExtensionUseCase,

@@ -1,7 +1,7 @@
+import { Command } from "./command";
 import { CommandOptions } from "./commandOptions";
-import { BaseCommand } from "./baseCommand";
 
-export abstract class CompleteCommand extends BaseCommand {
+export abstract class CommandComplete extends Command {
 
     async execute(options: CommandOptions): Promise<void> {
 

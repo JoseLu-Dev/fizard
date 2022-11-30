@@ -3,7 +3,7 @@ import { GetFilesWithStatsUseCase } from "../useCases/getFilesWithStatsUseCase";
 import { WriteComputedFilesUseCase } from "../useCases/writeComputedFilesUseCase";
 import { FileWrapper } from "../fileWrapper";
 
-export abstract class BaseCommand {
+export abstract class Command {
 
     constructor(
         private readonly _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
