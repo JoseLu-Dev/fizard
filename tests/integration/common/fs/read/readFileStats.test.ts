@@ -1,5 +1,4 @@
 import { ReadFileStats } from "../../../../../src/common/data/fs/read/readFileStats"
-import * as fs from 'fs/promises';
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 
@@ -8,8 +7,6 @@ const readFileStats: ReadFileStats = new ReadFileStats()
 describe('list', () => {
     
     it('return a stats object of the file', () => withLocalTmpDir(async () => {
-
-        await fs.writeFile('file', 'content')
 
         await outputFiles({
             'folder':{}
