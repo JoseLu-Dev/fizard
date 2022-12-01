@@ -48,8 +48,7 @@ describe('list', () => {
         await fs.writeFile('file', 'content')
         console.log('NEW FILE CREATED' + await fs.readFile('file'))
         console.log(process.cwd())
-        console.log(await fs.readdir(''))
-        console.log(await fs.readdir(process.cwd()))
+        console.log('FOLDER CONTENTS: ' + await fs.readdir(process.cwd()))
 
 
         const files = await getFilesWithStatsUseCase.list(process.cwd(), undefined, undefined)
