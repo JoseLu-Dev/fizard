@@ -45,6 +45,7 @@ describe('list', () => {
     it('gets all files and folders in the directory with its stats', () => withLocalTmpDir(async () => {
         await fs.writeFile('file', 'content')
         console.log('NEW FILE CREATED' + await fs.readFile('file'))
+        console.log(process.cwd())
 
         await outputFiles(folderStructure)
 
