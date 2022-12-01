@@ -43,11 +43,14 @@ const folderStructure = {
 describe('list', () => {
 
     it('gets all files and folders in the directory with its stats', () => withLocalTmpDir(async () => {
+        await outputFiles(folderStructure)
+
         await fs.writeFile('file', 'content')
         console.log('NEW FILE CREATED' + await fs.readFile('file'))
         console.log(process.cwd())
+        console.log(await fs.readdir(''))
+        console.log(await fs.readdir(process.cwd()))
 
-        await outputFiles(folderStructure)
 
         const files = await getFilesWithStatsUseCase.list(process.cwd(), undefined, undefined)
 
