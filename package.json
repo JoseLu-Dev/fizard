@@ -6,12 +6,11 @@
   "type": "commonjs",
   "scripts": {
     "start": "tsc && node build/index.js",
-    "test": "npm run test:unit && npm run test:int && npm run test:e2e",
+    "test": "jest tests",
     "test:unit": "jest tests/unit",
     "test:watch": "npm run test:unit -- --watch --rootDir src",
     "test:cov": "npm run test:unit -- --coverage",
-    "test:int": "jest tests/integration",
-    "test:e2e": "jest tests/e2e",
+    "test:ci": "npm run test -- --runInBand ",
     "build": "npx tsc",
     "install-global": "npx tsc && npm install -g ."
   },
