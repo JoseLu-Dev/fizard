@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import 'reflect-metadata'
 
-const chalk = require('chalk')
-const clear = require('clear')
-const figlet = require('figlet')
+import chalk from 'chalk'
+import clear from 'clear'
+import figlet from 'figlet'
 import { Command } from '@commander-js/extra-typings'
 import { Container } from 'typedi'
 
