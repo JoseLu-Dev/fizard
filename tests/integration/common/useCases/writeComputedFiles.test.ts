@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 
+import * as path from 'path'
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 const dirTree = require("directory-tree");
@@ -20,18 +21,18 @@ describe('write', () => {
 
         const files = [
             {
-                pathCurrentComplete: () => `${process.cwd()}\\video.mp4`,
-                pathNewComplete: () => `${process.cwd()}\\videos\\video.mp4`
+                pathCurrentComplete: () => path.join(process.cwd(), 'video.mp4'),
+                pathNewComplete: () => path.join(process.cwd(), 'videos', 'video.mp4')
             },
             {
-                pathNewComplete: () => `${process.cwd()}\\newFile.file`,
+                pathNewComplete: () => path.join(process.cwd(), 'newFile.file'),
                 isNew: true,
                 stats: {
                     isFile: () => true
                 }
             },
             {
-                pathNewComplete: () => `${process.cwd()}\\newFolder`,
+                pathNewComplete: () => path.join(process.cwd(), 'newFolder'),
                 isNew: true,
                 stats: {
                     isDirectory: () => true,
@@ -39,12 +40,12 @@ describe('write', () => {
                 }
             }
         ]
-        
-        
-        await writeComputedFiles.write(files)
-        
 
-        const tree = dirTree(process.cwd(), {attributes: ['type']});
+
+        await writeComputedFiles.write(files)
+
+
+        const tree = dirTree(process.cwd(), { attributes: ['type'] });
 
         const treeFiles = tree.children
 
