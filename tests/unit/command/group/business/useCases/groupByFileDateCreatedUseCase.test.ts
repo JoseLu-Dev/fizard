@@ -1,4 +1,5 @@
 import { Stats } from "fs"
+import * as path from 'path'
 
 import { GroupByFileDateCreatedUseCase } from "../../../../../../src/command/group/business/useCases/groupByFileDateCreatedUseCase"
 import { FileWrapper } from "../../../../../../src/common/business/fileWrapper"
@@ -18,7 +19,7 @@ describe('group', () => {
 
         groupByFileExtension.group(files)
 
-        expect(files[0].pathNewComplete()).toBe('downloads\\2022-11-3\\example.mp4')
+        expect(files[0].pathNewComplete()).toBe(path.join('downloads','2022-11-3','example.mp4'))
     })
 
     it('moves files to a no-date when FileWrapper has no stats', async () => {
@@ -29,7 +30,7 @@ describe('group', () => {
 
         groupByFileExtension.group(files)
 
-        expect(files[0].pathNewComplete()).toBe('downloads\\no-date\\example.mp4')
+        expect(files[0].pathNewComplete()).toBe(path.join('downloads','no-date','example.mp4'))
     })
 
 })

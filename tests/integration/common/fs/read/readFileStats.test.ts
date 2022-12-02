@@ -7,6 +7,7 @@ const readFileStats: ReadFileStats = new ReadFileStats()
 describe('list', () => {
     
     it('return a stats object of the file', () => withLocalTmpDir(async () => {
+
         await outputFiles({
             'folder':{}
         })
