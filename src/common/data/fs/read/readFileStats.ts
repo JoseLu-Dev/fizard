@@ -7,7 +7,6 @@ import * as path from 'path'
 export class ReadFileStats {
 
     async read(filePath: string): Promise<Stats> {
-        console.log(path.normalize(filePath))
         return await fs.stat(path.normalize(filePath))
     }
 

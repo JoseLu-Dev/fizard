@@ -7,6 +7,7 @@ const dirTree = require("directory-tree");
 import { Container } from 'typedi'
 
 import { WriteComputedFilesUseCase } from '../../../../src/common/business/useCases/writeComputedFilesUseCase'
+import { FileWrapper } from '../../../../src/common/business/fileWrapper';
 
 const writeComputedFiles: WriteComputedFilesUseCase = Container.get(WriteComputedFilesUseCase)
 
@@ -39,7 +40,7 @@ describe('write', () => {
                     isFile: () => false,
                 }
             }
-        ]
+        ] as FileWrapper[]
 
 
         await writeComputedFiles.write(files)

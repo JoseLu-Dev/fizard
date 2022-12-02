@@ -1,4 +1,5 @@
 import { Stats } from "fs"
+import * as path from 'path'
 
 export class FileWrapper {
     pathCurrent: string
@@ -18,11 +19,11 @@ export class FileWrapper {
     }
 
     pathCurrentComplete(): string {
-        return `${this.pathCurrent}\\${this.name}`
+        return path.join(this.pathCurrent, this.name)
     }
 
     pathNewComplete(): string {
-        return `${this.pathNew}\\${this.name}`
+        return path.join(this.pathNew, this.name)
     }
 
 }
