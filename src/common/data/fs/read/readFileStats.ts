@@ -6,7 +6,7 @@ import { Stats } from "fs"
 export class ReadFileStats {
 
     async read(path: string): Promise<Stats> {
-        return await fs.stat(path)
+        return await fs.stat(path.normalize(path))
     }
 
 }

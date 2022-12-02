@@ -3,7 +3,6 @@ import 'reflect-metadata'
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 import { Container } from 'typedi'
-import * as fs from 'fs/promises';
 
 import { GetFilesWithStatsUseCase } from '../../../../src/common/business/useCases/getFilesWithStatsUseCase'
 
@@ -44,12 +43,6 @@ describe('list', () => {
 
     it('gets all files and folders in the directory with its stats', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
-
-        await fs.writeFile('file', 'content')
-        console.log('NEW FILE CREATED' + await fs.readFile('file'))
-        console.log(process.cwd())
-        console.log('FOLDER CONTENTS: ' + await fs.readdir(process.cwd()))
-
 
         const files = await getFilesWithStatsUseCase.list(process.cwd(), undefined, undefined)
 
