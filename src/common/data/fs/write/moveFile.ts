@@ -1,5 +1,5 @@
 import * as fse from 'fs-extra'
-import path from 'path'
+import * as path from 'path'
 import { Service } from "typedi"
 
 @Service()
