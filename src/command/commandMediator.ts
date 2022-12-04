@@ -3,11 +3,15 @@ import { Service } from 'typedi'
 
 import { GroupFiles } from './group/business/groupFiles'
 import { GroupOptions } from './group/business/groupOptions'
+import { DestructureFolders } from './destructure/business/destructureFolders';
 
 @Service()
 export class CommandMediator {
 
-    constructor(private readonly _groupFiles: GroupFiles) { }
+    constructor(
+        private readonly _groupFiles: GroupFiles,
+        private readonly _destructureFolders: DestructureFolders,
+    ) { }
 
     /**
      * Defines and adds commands to a commander-js program
@@ -23,7 +27,14 @@ export class CommandMediator {
             .option('-d, --date-created', 'By date created')
             .option('-e, --extension', 'By extension type')
             .action((options: GroupOptions) => {
-                this._groupFiles.execute({path: executionPath, specificOptions: options})
+                this._groupFiles.execute({ path: executionPath, specificOptions: options })
+            })
+
+        program
+            .command('destructure')
+            .description('Moves all files under folder structure to the execution path')
+            .action(() => {
+                this._destructureFolders.execute({ path: executionPath, findOptions: { recursive: true } })
             })
     }
 }
