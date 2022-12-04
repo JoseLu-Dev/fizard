@@ -5,10 +5,12 @@ import { FileWrapper } from '../../../../../src/common/business/fileWrapper';
 const createDirMock = jest.fn()
 const createFileMock = jest.fn()
 const moveFileMock = jest.fn()
+const deleteFileMock = jest.fn()
 const writeComputedFiles = new WriteComputedFilesUseCase(
     { create: createDirMock },
     { create: createFileMock },
     { move: moveFileMock },
+    { delete: deleteFileMock },
 )
 
 describe('write', () => {
@@ -75,6 +77,25 @@ describe('write', () => {
         expect(createDirMock).toBeCalledTimes(1)
 
         expect(createDirMock).toHaveBeenCalledWith('new1')
+    })
+
+    it('calls delete file', async () => {
+        const files: FileWrapper[] = [
+            {
+                pathCurrentComplete: () => 'new1',
+                isDeletedMarked: true,
+                stats: {
+                    isDirectory: () => true,
+                    isFile: () => false,
+                }
+            }
+        ] as FileWrapper[]
+
+        await writeComputedFiles.write(files)
+
+        expect(deleteFileMock).toBeCalledTimes(1)
+
+        expect(deleteFileMock).toHaveBeenCalledWith('new1')
     })
 
 })
