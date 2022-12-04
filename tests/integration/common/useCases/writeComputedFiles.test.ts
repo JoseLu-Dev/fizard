@@ -13,6 +13,8 @@ const writeComputedFiles: WriteComputedFilesUseCase = Container.get(WriteCompute
 
 const folderStructure = {
     'video.mp4': '',
+    'fileToDelete.deleted': '',
+    'folderToDelete': [],
 }
 
 describe('write', () => {
@@ -39,6 +41,22 @@ describe('write', () => {
                     isDirectory: () => true,
                     isFile: () => false,
                 }
+            },
+            {
+                pathCurrentComplete: () => path.join(process.cwd(), 'folderToDelete'),
+                isDeletedMarked: true,
+                stats: {
+                    isDirectory: () => true,
+                    isFile: () => false,
+                }
+            },
+            {
+                pathCurrentComplete: () => path.join(process.cwd(), 'fileToDelete.deleted'),
+                isDeletedMarked: true,
+                stats: {
+                    isDirectory: () => false,
+                    isFile: () => true,
+                }
             }
         ] as FileWrapper[]
 
@@ -60,6 +78,12 @@ describe('write', () => {
         const folderCreated = treeFiles.filter(c => c.name === 'newFolder')[0]
         expect(folderCreated.name).toBe('newFolder')
         expect(folderCreated.type).toBe('directory')
+
+        const folderDeleted = treeFiles.filter(c => c.name === 'folderToDelete')[0]
+        expect(folderDeleted).toBeUndefined()
+
+        const fileDeleted = treeFiles.filter(c => c.name === 'fileToDelete.deleted')[0]
+        expect(folderDeleted).toBeUndefined()
     }))
 
 })

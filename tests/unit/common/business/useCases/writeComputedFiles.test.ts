@@ -6,11 +6,13 @@ const createDirMock = jest.fn()
 const createFileMock = jest.fn()
 const moveFileMock = jest.fn()
 const deleteFileMock = jest.fn()
+const deleteFolderMock = jest.fn()
 const writeComputedFiles = new WriteComputedFilesUseCase(
     { create: createDirMock },
     { create: createFileMock },
     { move: moveFileMock },
     { delete: deleteFileMock },
+    { delete: deleteFolderMock }
 )
 
 describe('write', () => {
@@ -85,8 +87,8 @@ describe('write', () => {
                 pathCurrentComplete: () => 'new1',
                 isDeletedMarked: true,
                 stats: {
-                    isDirectory: () => true,
-                    isFile: () => false,
+                    isDirectory: () => false,
+                    isFile: () => true,
                 }
             }
         ] as FileWrapper[]
@@ -96,6 +98,26 @@ describe('write', () => {
         expect(deleteFileMock).toBeCalledTimes(1)
 
         expect(deleteFileMock).toHaveBeenCalledWith('new1')
+    })
+
+
+    it('calls delete folder', async () => {
+        const files: FileWrapper[] = [
+            {
+                pathCurrentComplete: () => 'new1',
+                isDeletedMarked: true,
+                stats: {
+                    isDirectory: () => true,
+                    isFile: () => false,
+                }
+            }
+        ] as FileWrapper[]
+
+        await writeComputedFiles.write(files)
+
+        expect(deleteFolderMock).toBeCalledTimes(1)
+
+        expect(deleteFolderMock).toHaveBeenCalledWith('new1')
     })
 
 })
