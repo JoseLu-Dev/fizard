@@ -19,13 +19,17 @@ export class WriteComputedFilesUseCase {
     ) { }
 
 
-    async write(files: Array<FileWrapper>): Promise<void[]> {
-        return Promise.all(files.map(file => this._performFileWrite(file)))
+    async write(files: FileWrapper[]): Promise<void> {
+        return files.reduce((accumulatorPromise, file) => {
+            return accumulatorPromise.then(() => {
+                return this._performFileWrite(file);
+            });
+        }, Promise.resolve());
     }
 
     private async _performFileWrite(file: FileWrapper): Promise<void> {
 
-        if(file.isDeletedMarked){
+        if (file.isDeletedMarked) {
             return this._delete(file)
         }
 
@@ -39,8 +43,8 @@ export class WriteComputedFilesUseCase {
             return this._createDir.create(file.pathNewComplete())
     }
 
-    private async _delete(file: FileWrapper): Promise<void>{
-        if(file?.stats?.isFile()){
+    private async _delete(file: FileWrapper): Promise<void> {
+        if (file?.stats?.isFile()) {
             return this._deleteFile.delete(file.pathCurrentComplete())
         }
         return this._deleteFolder.delete(file.pathCurrentComplete())
