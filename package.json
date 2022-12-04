@@ -8,9 +8,7 @@
     "start": "tsc && node build/index.js",
     "start:dev": "ts-node src/index.ts",
     "test": "jest tests",
-    "test:unit": "jest tests/unit",
-    "test:watch": "npm run test:unit -- --watch --rootDir src",
-    "test:cov": "npm run test:unit -- --coverage",
+    "test:cov": "npm run test -- --coverage",
     "test:ci": "npm run test -- --runInBand ",
     "build": "npx tsc",
     "install-global": "npx tsc && npm install -g ."
