@@ -7,6 +7,7 @@ export class FileWrapper {
     name: string
 
     isNew?: boolean
+    isDeletedMarked?: boolean
 
     stats?: Stats
 
