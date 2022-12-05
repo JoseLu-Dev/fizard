@@ -49,3 +49,46 @@ describe('removeFiles', () => {
     })
 
 })
+
+describe('removeFiles of pathCurrent', () => {
+
+    it('returns a list of FileWrapper without files', async () => {
+
+        const files: Array<FileWrapper> = [
+            {
+                pathCurrent: '/folder/videos',
+                stats: { isFile: () => false }
+            },
+            {
+                pathCurrent: '/folder',
+                stats: { isFile: () => false }
+            },
+            {
+                pathCurrent: '/folder/videos',
+                stats: { isFile: () => true }
+            },
+            {
+                pathCurrent: '/folder/text',
+                stats: { isFile: () => true }
+            },
+            {
+                pathCurrent: '/folder',
+                stats: { isFile: () => true }
+            },
+            {
+                pathCurrent: '/folder',
+                stats: { isFile: () => true }
+            },
+        ] as Array<FileWrapper>
+
+        const filesFiltered = fileWrapperFilter.removeFilesOfPath(files, '/folder')
+
+        expect(filesFiltered).toHaveLength(4)
+
+        filesFiltered.forEach(f=>{
+            if(f.stats?.isFile())
+                expect(f.pathCurrent).not.toBe('/folder')
+        })
+    })
+
+})

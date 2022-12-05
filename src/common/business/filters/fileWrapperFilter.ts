@@ -13,4 +13,8 @@ export class FileWrapperFilter {
         return files.filter(e => !e.stats?.isFile())
     }
 
+    removeFilesOfPath(files: Array<FileWrapper>, path: string): Array<FileWrapper> {
+        return files.filter(e => !e.stats?.isFile() || e.pathCurrent !== path)
+    }
+
 }
