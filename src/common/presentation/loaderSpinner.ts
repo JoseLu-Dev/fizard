@@ -1,23 +1,25 @@
-import ora from 'ora'
-import { Service } from 'typedi';
+import { createSpinner } from 'nanospinner'
 
-@Service()
-export class LoaderSpinner {
+class LoaderSpinner {
 
-    private readonly spinner = ora()
+    private readonly spinner = createSpinner()
 
     start(text: string, color: Color) {
-        this.spinner.color = color
-        this.spinner.start(text)
+        this.spinner.start({
+            text: text,
+            color: color,
+        })
     }
 
     update(text: string, color: Color) {
-        this.spinner.color = color
-        this.spinner.text = text
+        this.spinner.update({
+            text: text,
+            color: color,
+        })
     }
 
     stop() {
-        this.spinner.stop()
+        this.spinner.clear()
     }
 
 }
@@ -33,3 +35,5 @@ export enum Color {
     WHITE = 'white',
     GRAY = 'gray'
 }
+
+export const loaderSpinner = new LoaderSpinner()
