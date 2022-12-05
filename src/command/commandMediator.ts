@@ -27,14 +27,14 @@ export class CommandMediator {
             .option('-d, --date-created', 'By date created')
             .option('-e, --extension', 'By extension type')
             .action((options: GroupOptions) => {
-                this._groupFiles.execute({ path: executionPath, specificOptions: options })
+                return this._groupFiles.execute({ path: executionPath, specificOptions: options })
             })
 
         program
             .command('destructure')
             .description('Moves all files under folder structure to the execution path')
             .action(() => {
-                this._destructureFolders.execute({ path: executionPath, findOptions: { recursive: true } })
+                return this._destructureFolders.execute({ path: executionPath, findOptions: { recursive: true } })
             })
     }
 }
