@@ -19,7 +19,7 @@ class LoaderSpinner {
     }
 
     stop() {
-        this.spinner.clear()
+        this.spinner.stop()
     }
 
 }

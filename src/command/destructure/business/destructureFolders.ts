@@ -26,6 +26,8 @@ export class DestructureFolders extends CommandComplete {
     }
 
     protected _process(files: FileWrapper[], options: CommandOptions): Promise<FileWrapper[]> {
+        
+        files = this._fileWrapperFilter.removeFilesOfPath(files, options.path)
 
         const filesFiltered = this._fileWrapperFilter.removeDirs(files)
         this._moveFilesToRootUseCase.move(filesFiltered, options.path)
