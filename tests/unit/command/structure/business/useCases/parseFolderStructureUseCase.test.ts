@@ -11,7 +11,7 @@ describe('create', () => {
 
     it('creates simple folder structure', async () => {
 
-        const structure = ['folder,folder2,file.f', 'subfolder,file.r', 'file.ff']
+        const structure = ['folder-folder2-file.f', 'subfolder-file.r', 'file.ff']
 
         const filesStructure: FileWrapper[][] = parseFolderStructure.parse(structure)
 

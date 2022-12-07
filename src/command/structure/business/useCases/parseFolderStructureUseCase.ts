@@ -15,7 +15,7 @@ export class ParseFolderStructureUseCase {
         let fileStructure: FileWrapper[][] = []
 
         for (let index = 0; index < structure.length; index++) {
-            fileStructure.push(this._parseFiles(structure[index].split(',')))
+            fileStructure.push(this._parseFiles(structure[index].split('-')))
         }
 
         return fileStructure
