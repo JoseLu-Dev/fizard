@@ -42,12 +42,16 @@ describe('create', () => {
                     name: 'file.ff', pathCurrent: '',
                     stats: { isFile: () => true, isDirectory: () => false } as Stats
                 }),
+                new FileWrapper({
+                    name: 'folder', pathCurrent: '',
+                    stats: { isFile: () => true, isDirectory: () => true } as Stats
+                }),
             ],
         ] as FileWrapper[][]
 
         const fileStructure = createFolderStructure.create(folderStructure, '')
 
-        expect(fileStructure).toHaveLength(9)
+        expect(fileStructure).toHaveLength(11)
     })
 
 })

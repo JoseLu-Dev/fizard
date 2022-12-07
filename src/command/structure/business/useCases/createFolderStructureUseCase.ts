@@ -20,7 +20,7 @@ export class CreateFolderStructureUseCase {
 
             files.push(new FileWrapper({name: file.name, pathCurrent: dirPath, isNew: true, stats: file.stats}))
             
-            if(file.stats?.isDirectory()){
+            if(file.stats?.isDirectory() && level + 1 < structure.length){
                 files.push(...this.create(structure, path.join(dirPath, file.name), level+1))
             }
             
