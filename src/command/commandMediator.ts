@@ -4,6 +4,7 @@ import { Service } from 'typedi'
 import { GroupFiles } from './group/business/groupFiles'
 import { GroupOptions } from './group/business/groupOptions'
 import { DestructureFolders } from './destructure/business/destructureFolders';
+import { StructureCreate } from './structure/business/structureCreate';
 
 @Service()
 export class CommandMediator {
@@ -11,6 +12,7 @@ export class CommandMediator {
     constructor(
         private readonly _groupFiles: GroupFiles,
         private readonly _destructureFolders: DestructureFolders,
+        private readonly _structureCreate: StructureCreate,
     ) { }
 
     /**
@@ -35,6 +37,14 @@ export class CommandMediator {
             .description('Moves all files under folder structure to the execution path')
             .action(() => {
                 return this._destructureFolders.execute({ path: executionPath, findOptions: { recursive: true } })
+            })
+
+        program
+            .command('structure')
+            .option('-s --structure <structure...>')
+            .description('Creates a folder and file structure')
+            .action((options) => {
+                return this._structureCreate.execute({ path: executionPath, specificOptions: options })
             })
     }
 }
