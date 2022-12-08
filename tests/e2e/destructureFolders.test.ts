@@ -42,9 +42,9 @@ const folderStructureOnlyFiles = {
 }
 
 
-describe('group by date', () => {
+describe('destructure', () => {
 
-    it('moves files under a <dd-mm-yyyy> folder', () => withLocalTmpDir(async () => {
+    it('moves all files to execution path and deletes all directories', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
         await parseArgs(['', '', 'destructure'])
