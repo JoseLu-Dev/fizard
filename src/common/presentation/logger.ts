@@ -1,6 +1,5 @@
 import * as log4js from 'log4js'
 
-
 class Logger{
 
     private _logger: log4js.Logger
@@ -34,5 +33,4 @@ class Logger{
     }
 }
 
-export const logger = new Logger('default')
 export const loggerDebug = new Logger('debug')
