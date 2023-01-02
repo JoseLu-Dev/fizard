@@ -1,8 +1,43 @@
-//import { createSpinner } from 'nanospinner'
 import * as log4js from 'log4js'
+import * as cliProgress from 'cli-progress'
 import { createSpinner } from 'nanospinner'
+import chalk from 'chalk';
 
 log4js.configure('config/log4js.json')
+
+class LogQueue {
+
+    private readonly queue: Log[] = []
+
+    add(log: Log) {
+        this.queue.push(log)
+    }
+
+    next() {
+        return this.queue.shift()
+    }
+}
+
+interface Log {
+    logLevel: LogLevel
+    log: string
+}
+
+enum LogLevel {
+    INFO, WARN, ERROR, FATAL
+}
+
+export enum Color {
+    BLACK = 'black',
+    RED = 'red',
+    GREEN = 'green',
+    YELLOW = 'yellow',
+    BLUE = 'blue',
+    MAGENTA = 'magenta',
+    CYAN = 'cyan',
+    WHITE = 'white',
+    GRAY = 'gray'
+}
 
 class Cli {
 
@@ -11,10 +46,16 @@ class Cli {
 
     private readonly logQueue: LogQueue = new LogQueue()
 
-    private isLoading: boolean = false
+    private readonly spinner = createSpinner()
     private isSpinning: boolean = false
 
-    private readonly spinner = createSpinner()
+    private readonly loading = new cliProgress.SingleBar({
+        format: 'CLI Progress |' + chalk.green('{bar}') + '| {percentage}% || {value}/{total} || Time elapsed: {duration_formatted}',
+        barCompleteChar: '\u2588',
+        barIncompleteChar: '\u2591',
+        hideCursor: true
+    })
+    private isLoading: boolean = false
 
     info(log: string) {
         this.loggerFile.info(log)
@@ -98,41 +139,26 @@ class Cli {
         this.isSpinning = false
         this.logPending()
     }
-}
 
-
-class LogQueue {
-
-    private readonly queue: Log[] = []
-
-    add(log: Log) {
-        this.queue.push(log)
+    loadingStart(total: number) {
+        this.isLoading = true
+        this.loading.start(total, 0)
     }
 
-    next() {
-        return this.queue.shift()
+    loadingUpdate(progress: number) {
+        this.loading.update(progress)
     }
-}
 
-interface Log {
-    logLevel: LogLevel
-    log: string
-}
+    loadingEnd() {
+        this.loading.stop()
+        this.onLoadingStopped()
+    }
 
-enum LogLevel {
-    INFO, WARN, ERROR, FATAL
+    private onLoadingStopped() {
+        this.isLoading = false
+        this.logPending()
+    }
+
 }
 
 export const cli = new Cli()
-
-export enum Color {
-    BLACK = 'black',
-    RED = 'red',
-    GREEN = 'green',
-    YELLOW = 'yellow',
-    BLUE = 'blue',
-    MAGENTA = 'magenta',
-    CYAN = 'cyan',
-    WHITE = 'white',
-    GRAY = 'gray'
-}
