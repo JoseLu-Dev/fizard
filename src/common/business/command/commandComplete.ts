@@ -1,4 +1,4 @@
-import { Color, loaderSpinner } from "../../presentation/loaderSpinner";
+import { cli, Color } from "../../cli";
 import { GetFilesWithStatsUseCase } from "../useCases/getFilesWithStatsUseCase";
 import { WriteComputedFilesUseCase } from "../useCases/writeComputedFilesUseCase";
 import { Command } from "./command";
@@ -18,16 +18,13 @@ export abstract class CommandComplete extends Command {
 
     async execute(options: CommandOptions): Promise<void> {
 
-        loaderSpinner.start('Reading', Color.YELLOW)
         let files = await this._read(options)
 
-        loaderSpinner.update('Processing', Color.MAGENTA)
+        cli.spinnerStart('Processing', Color.MAGENTA)
         files = await this._process(files, options)
+        cli.spinnerSuccess()
 
-        loaderSpinner.update('Writing', Color.GREEN)
         await this._write(files)
-
-        loaderSpinner.stop()
     }
 
 }
