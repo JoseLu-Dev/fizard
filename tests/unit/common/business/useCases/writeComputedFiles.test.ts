@@ -36,7 +36,7 @@ describe('write', () => {
             }
         ] as FileWrapper[]
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
         expect(moveFileMock).toBeCalledTimes(2)
 
@@ -55,7 +55,7 @@ describe('write', () => {
             }
         ] as FileWrapper[]
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
         expect(createFileMock).toBeCalledTimes(1)
 
@@ -74,7 +74,7 @@ describe('write', () => {
             }
         ] as FileWrapper[]
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
         expect(createDirMock).toBeCalledTimes(1)
 
@@ -93,7 +93,7 @@ describe('write', () => {
             }
         ] as FileWrapper[]
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
         expect(deleteFileMock).toBeCalledTimes(1)
 
@@ -113,11 +113,12 @@ describe('write', () => {
             }
         ] as FileWrapper[]
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
         expect(deleteFolderMock).toBeCalledTimes(1)
 
         expect(deleteFolderMock).toHaveBeenCalledWith('new1')
     })
 
+    //TODO test to ensure function onFileWritten() is called each time
 })

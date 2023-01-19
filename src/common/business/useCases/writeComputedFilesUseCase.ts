@@ -19,9 +19,10 @@ export class WriteComputedFilesUseCase {
     ) { }
 
 
-    async write(files: FileWrapper[]): Promise<void> {
+    async write(files: FileWrapper[], onFileWritten: (index: number) => void): Promise<void> {
         return files.reduce((accumulatorPromise, file) => {
             return accumulatorPromise.then(() => {
+                onFileWritten(files.indexOf(file) + 1)
                 return this._performFileWrite(file);
             });
         }, Promise.resolve());

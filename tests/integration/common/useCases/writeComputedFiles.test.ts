@@ -61,7 +61,7 @@ describe('write', () => {
         ] as FileWrapper[]
 
 
-        await writeComputedFiles.write(files)
+        await writeComputedFiles.write(files, () => { })
 
 
         const tree = dirTree(process.cwd(), { attributes: ['type'] });
