@@ -1,9 +1,10 @@
 import * as log4js from 'log4js'
 import * as cliProgress from 'cli-progress'
 import { createSpinner } from 'nanospinner'
-import chalk from 'chalk';
+import { config } from '../config/log4js.config';
+const chalk = require('chalk');
 
-log4js.configure('config/log4js.json')
+log4js.configure(config)
 
 class LogQueue {
 
@@ -50,7 +51,7 @@ class Cli {
     private isSpinning: boolean = false
 
     private readonly loading = new cliProgress.SingleBar({
-        format: 'CLI Progress |' + chalk.green('{bar}') + '| {percentage}% || {value}/{total} || Time elapsed: {duration_formatted}',
+        format: '{processName} |' + chalk.green('{bar}') + '| {percentage}% || {value}/{total} || Time elapsed: {duration_formatted}',
         barCompleteChar: '\u2588',
         barIncompleteChar: '\u2591',
         hideCursor: true
@@ -140,9 +141,9 @@ class Cli {
         this.logPending()
     }
 
-    loadingStart(total: number) {
+    loadingStart(total: number, processName: string) {
         this.isLoading = true
-        this.loading.start(total, 0)
+        this.loading.start(total, 0, {processName: processName})
     }
 
     loadingUpdate(progress: number) {
