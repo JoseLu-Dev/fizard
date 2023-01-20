@@ -40,11 +40,10 @@ export class CommandMediator {
             })
 
         program
-            .command('structure')
-            .option('-s --structure <structure...>')
+            .command('structure <structure...>')
             .description('Creates a folder and file structure')
-            .action((options) => {
-                return this._structureCreate.execute({ path: executionPath, specificOptions: options })
+            .action((structure) => {
+                return this._structureCreate.execute({ path: executionPath, specificOptions: {structure: structure} })
             })
     }
 }

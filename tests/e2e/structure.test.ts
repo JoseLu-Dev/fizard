@@ -10,7 +10,7 @@ describe('structure', () => {
 
     it('creates a folder and file structure', () => withLocalTmpDir(async () => {
 
-        await parseArgs(['', '', 'structure', '-s', 'folder-folder2-folder3', 'file.txt-subfolder-subfolder2', 'childFolder-file.txt'])
+        await parseArgs(['', '', 'structure', 'folder-folder2-folder3', 'file.txt-subfolder-subfolder2', 'childFolder-file.txt'])
 
         const tree: DirTree = dirTree(process.cwd());
 
