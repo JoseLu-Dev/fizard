@@ -3,6 +3,8 @@ jest.mock('fs-extra', () => ({
     ensureFile: ensureFileMock
 }))
 
+jest.mock('../../../../../../src/common/cli.ts')
+
 import { CreateFile } from '../../../../../../src/common/data/fs/write/createFile';
 const createFile: CreateFile = new CreateFile()
 
@@ -15,4 +17,10 @@ describe('create', () => {
         expect(ensureFileMock).toHaveBeenCalledWith('C:\\temp\\image.jpg')
     })
 
+    it('catches error thrown in ensureFile function', async () => {
+
+        ensureFileMock.mockImplementation(() => { throw new Error() })
+
+        await createFile.create('')
+    })
 })
