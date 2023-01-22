@@ -17,7 +17,7 @@ export class DestructureCommandDescription {
 
         program
             .command('destructure')
-            .description('Moves all files under folder structure to the execution path')
+            .summary('Moves all files under folder structure to the execution path')
             .action(() => {
                 return this._destructureFolders.execute({ path: executionPath, findOptions: { recursive: true } })
             })
