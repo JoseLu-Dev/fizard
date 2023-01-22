@@ -8,16 +8,16 @@ describe('list', () => {
 
     it('list files and folders in a directory', () => withLocalTmpDir(async () => {
         await outputFiles({
-            '.configrc.json': '',
+            '.config.json': '',
             'folder':{},
             'README.md': '',
         })
 
         const fileNames = await listFiles.list(process.cwd())
 
-        expect(fileNames[0]).toBe('.configrc.json')
-        expect(fileNames[1]).toBe('folder')
-        expect(fileNames[2]).toBe('README.md')
+        expect(fileNames).toContain('README.md')
+        expect(fileNames).toContain('folder')
+        expect(fileNames).toContain('.config.json')
     }))
 
 })

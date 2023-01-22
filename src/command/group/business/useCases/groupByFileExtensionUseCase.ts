@@ -1,4 +1,5 @@
 import { Service } from "typedi"
+import * as path from 'path'
 
 import { FileWrapper } from "../../../../common/business/fileWrapper"
 import { MimeType } from "../../../../common/data/mimetype/mimeType"
@@ -19,7 +20,7 @@ export class GroupByFileExtensionUseCase {
         
         const fileType = this._mimeType.getFileType(file.name)
 
-        file.pathNew = `${file.pathNew}\\${fileType}`
+        file.pathNew = path.join(file.pathNew, fileType)
     }
 
 }

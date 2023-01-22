@@ -9,7 +9,6 @@ import { FileWrapper } from "../../../common/business/fileWrapper"
 import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
 import { CommandComplete } from "../../../common/business/command/commandComplete"
 import { CommandOptions } from "../../../common/business/command/commandOptions"
-import { LoaderSpinner } from "../../../common/presentation/loaderSpinner"
 
 @Service()
 export class GroupFiles extends CommandComplete {
@@ -22,7 +21,6 @@ export class GroupFiles extends CommandComplete {
     constructor(
         _getFilesMetadataUseCase: GetFilesWithStatsUseCase,
         _writeComputedFilesUseCase: WriteComputedFilesUseCase,
-        _loaderSpinner: LoaderSpinner,
         private readonly _fileWrapperFilter: FileWrapperFilter,
         private readonly _groupByFileExtensionUseCase: GroupByFileExtensionUseCase,
         private readonly _groupByFileDateCreatedUseCase: GroupByFileDateCreatedUseCase,
@@ -30,7 +28,6 @@ export class GroupFiles extends CommandComplete {
         super(
             _getFilesMetadataUseCase,
             _writeComputedFilesUseCase,
-            _loaderSpinner,
         )
     }
 

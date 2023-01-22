@@ -1,4 +1,5 @@
 import { Service } from "typedi"
+import * as path from 'path'
 
 import { FileWrapper } from "../../../../common/business/fileWrapper"
 
@@ -17,7 +18,7 @@ export class GroupByFileDateCreatedUseCase {
 
         const folder = this._getFolderFromFileDate(file)
 
-        file.pathNew = `${file.pathNew}\\${folder}`
+        file.pathNew = path.join(file.pathNew, folder)
     }
 
     private _getFolderFromFileDate(file: FileWrapper): string {

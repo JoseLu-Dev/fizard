@@ -6,10 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "start": "tsc && node build/index.js",
+    "start:dev": "ts-node src/index.ts",
     "test": "jest tests",
-    "test:unit": "jest tests/unit",
-    "test:watch": "npm run test:unit -- --watch --rootDir src",
-    "test:cov": "npm run test:unit -- --coverage",
+    "test:cov": "jest --testPathIgnorePatterns=.e2e.test.ts --coverage",
     "test:ci": "npm run test -- --runInBand ",
     "build": "npx tsc",
     "install-global": "npx tsc && npm install -g ."
@@ -20,6 +19,7 @@
   "devDependencies": {
     "@commander-js/extra-typings": "^9.4.1",
     "@types/clear": "^0.1.2",
+    "@types/cli-progress": "^3.11.0",
     "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^29.2.0",
@@ -29,18 +29,20 @@
     "jest": "^29.3.1",
     "output-files": "^2.0.10",
     "ts-jest": "^29.0.3",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.3",
     "with-local-tmp-dir": "^4.1.0"
   },
   "dependencies": {
     "chalk": "^4.1.0",
     "clear": "^0.1.0",
+    "cli-progress": "^3.11.2",
     "commander": "^9.4.1",
     "figlet": "^1.5.0",
     "fs-extra": "^10.1.0",
+    "log4js": "^6.7.1",
     "mime-types": "^2.1.35",
-    "ora": "^5.4.1",
+    "nanospinner": "^1.1.0",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.4.1",
     "typedi": "^0.10.0"

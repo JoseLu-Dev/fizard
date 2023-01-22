@@ -70,10 +70,10 @@ describe('list', () => {
     it('gets all files and folders in the directory filtered', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        const files = await getFilesWithStatsUseCase.list(process.cwd(), true, '\\w+(.avi)$')
+        const files = await getFilesWithStatsUseCase.list(process.cwd(), true, 'w+(.avi)$')
 
         files.forEach(file => {
-            expect(file.pathCurrentComplete()).toMatch(new RegExp('\\w+(.avi)$'))
+            expect(file.pathCurrentComplete()).toMatch(new RegExp('w+(.avi)$'))
         })
 
     }))

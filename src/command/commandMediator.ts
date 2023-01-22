@@ -1,29 +1,29 @@
 import { Command } from '@commander-js/extra-typings'
 import { Service } from 'typedi'
-
-import { GroupFiles } from './group/business/groupFiles'
-import { GroupOptions } from './group/business/groupOptions'
+import { DestructureCommandDescription } from './destructure/presentation/destructureCommandDescription';
+import { StructureCommandDescription } from './structure/presentation/structureCommandDescription';
+import { GroupCommandDescription } from './group/presentation/groupCommandDescription';
 
 @Service()
 export class CommandMediator {
 
-    constructor(private readonly _groupFiles: GroupFiles) { }
+    constructor(
+        private readonly _groupCommandDescription: GroupCommandDescription,
+        private readonly _destructureCommandDescription: DestructureCommandDescription,
+        private readonly _structureCommandDescription: StructureCommandDescription,
+    ) { }
 
     /**
-     * Defines and adds commands to a commander-js program
+     * Adds commands to a commander-js program defined in each command module
      * @param program commander-js program to add commands to
      */
     mediate(program: Command) {
 
         const executionPath = process.cwd()
 
-        program
-            .command('group')
-            .description('Group files depending on flags')
-            .option('-d, --date-created', 'By date created')
-            .option('-e, --extension', 'By extension type')
-            .action((options: GroupOptions) => {
-                this._groupFiles.execute({path: executionPath, specificOptions: options})
-            })
+        this._groupCommandDescription.apply(program, executionPath)
+        this._destructureCommandDescription.apply(program, executionPath)
+        this._structureCommandDescription.apply(program, executionPath)
+
     }
 }
