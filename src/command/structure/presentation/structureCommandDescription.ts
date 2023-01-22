@@ -17,9 +17,23 @@ export class StructureCommandDescription {
 
         program
             .command('structure <structure...>')
-            .description('Creates a folder and file structure')
+            .description(
+                'Creates a folder and file structure\n\n' +
+                'Example: structure feature-user business-data-presentation-file.properties\n' +
+                'Result: \n' +
+                '├───feature\n' +
+                '│   ├───business\n' +
+                '│   ├───data\n' +
+                '│   ├───presentation\n' +
+                '│   └───file.properties\n' +
+                '└───user\n' +
+                '    ├───business\n' +
+                '    ├───data\n' +
+                '    ├───presentation\n' +
+                '    └───file.properties'
+            )
             .action((structure) => {
-                return this._structureCreate.execute({ path: executionPath, specificOptions: {structure: structure} })
+                return this._structureCreate.execute({ path: executionPath, specificOptions: { structure: structure } })
             })
 
     }
