@@ -18,7 +18,7 @@ export class GroupCommandDescription {
 
         program
             .command('group')
-            .description('Group files depending on flags')
+            .summary('Group files depending on flags')
             .option('-d, --date-created', 'By date created')
             .option('-e, --extension', 'By extension type')
             .action((options: GroupOptions) => {

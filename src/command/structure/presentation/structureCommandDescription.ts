@@ -17,6 +17,7 @@ export class StructureCommandDescription {
 
         program
             .command('structure <structure...>')
+            .summary('Creates a folder and file structure')
             .description(
                 'Creates a folder and file structure\n\n' +
                 'Example: structure feature-user business-data-presentation-file.properties\n' +
