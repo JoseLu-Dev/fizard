@@ -1,6 +1,6 @@
 {
   "name": "file",
-  "version": "1.0.0",
+  "version": "0.1",
   "description": "A cli files/folder utilities program",
   "main": "src/index.ts",
   "type": "commonjs",
