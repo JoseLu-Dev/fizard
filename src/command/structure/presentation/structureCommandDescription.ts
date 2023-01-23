@@ -33,7 +33,7 @@ export class StructureCommandDescription {
                 '    ├───presentation\n' +
                 '    └───file.properties'
             )
-            .action((structure) => {
+            .action((structure: string[]) => {
                 return this._structureCreate.execute({ path: executionPath, specificOptions: { structure: structure } })
             })
 
