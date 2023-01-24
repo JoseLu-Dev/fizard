@@ -9,7 +9,8 @@ export async function parseArgs(argv: string[]): Promise<Command<[], {}>>{
     const program: Command = new Command()
     
     program
-      .description('A cli files/folder utilities program')
+      .description('A cli files/folders utilities program')
+      .version('v0.1')
     
     Container.get(CommandMediator).mediate(program)
 
