@@ -27,10 +27,7 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Get tag version
-      run: echo ::set-output name=tag_version::$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-
     - name: Publish to npm
-      run: npm publish --access public --tag ${{ steps.get_tag_version.outputs.tag_version }}
+      run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
