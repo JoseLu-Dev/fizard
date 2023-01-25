@@ -9,6 +9,8 @@ export async function parseArgs(argv: string[]): Promise<Command<[], {}>>{
     const program: Command = new Command()
     
     program
+      .name('fizard')
+      .usage('command [command options]')
       .description('A cli files/folders utilities program')
       .version('v0.1')
     
