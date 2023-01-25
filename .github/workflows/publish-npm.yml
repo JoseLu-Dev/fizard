@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,16 +21,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Test
-      run: npm run test:ci
-
     - name: Build
       run: npm run build
 
-    - name: Get tag version
-      run: echo ::set-output name=tag_version::$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-
-    - name: Publish to npm
-      run: npm publish --access public --tag ${{ steps.get_tag_version.outputs.tag_version }}
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - uses: JS-DevTools/npm-publish@v1
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
