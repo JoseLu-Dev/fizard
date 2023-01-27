@@ -19,4 +19,28 @@ describe('calculate', () => {
         console.log(checksum)
     }))
 
+    it('checksum is the same if two files have the same content', () => withLocalTmpDir(async () => {
+        await outputFiles({
+            'README.md': '',
+            'README.txt': '',
+        })
+
+        const checksumMD = listFiles.calculate('README.md')
+        const checksumTXT = listFiles.calculate('README.txt')
+
+        expect(checksumMD).toEqual(checksumTXT)
+    }))
+
+    it('checksum is different is two files have different content', () => withLocalTmpDir(async () => {
+        await outputFiles({
+            'README.md': '',
+            'README.txt': 'a',
+        })
+
+        const checksumMD = listFiles.calculate('README.md')
+        const checksumTXT = listFiles.calculate('README.txt')
+
+        expect(checksumMD).not.toEqual(checksumTXT)
+    }))
+
 })
