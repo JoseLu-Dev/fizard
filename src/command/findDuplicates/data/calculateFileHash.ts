@@ -3,7 +3,7 @@ import * as md5 from 'md5-file';
 import { cli } from "../../../common/cli"
 
 @Service()
-export class CalculateFileChecksum {
+export class CalculateFileHash {
 
     calculate(dir: string): string {
         try {

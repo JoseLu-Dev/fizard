@@ -1,8 +1,8 @@
-import { CalculateFileChecksum } from "../../../../../src/command/findDuplicates/data/calculateFileChecksum"
+import { CalculateFileHash } from "../../../../../src/command/findDuplicates/data/calculateFileHash"
 const withLocalTmpDir = require('with-local-tmp-dir')
 const outputFiles = require('output-files')
 
-const listFiles: CalculateFileChecksum = new CalculateFileChecksum()
+const listFiles: CalculateFileHash = new CalculateFileHash()
 
 describe('calculate', () => {
 

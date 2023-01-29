@@ -1,9 +1,9 @@
-import { CalculateFilesChecksum } from '../../../../../../src/command/findDuplicates/business/useCases/calculateFilesChecksum';
+import { CalculateFilesHash } from '../../../../../../src/command/findDuplicates/business/useCases/calculateFilesHash';
 import { FileWrapper } from '../../../../../../src/common/business/fileWrapper';
 
 
 const calculateMock = jest.fn()
-const calculateFilesChecksum = new CalculateFilesChecksum(
+const calculateFilesChecksum = new CalculateFilesHash(
     { calculate: calculateMock },
 )
 
@@ -18,7 +18,7 @@ describe('calculate', () => {
 
         calculateMock.mockReturnValue('hashExample')
 
-        calculateFilesChecksum.calculate(files)
+        calculateFilesChecksum.calculate(files, ()=>{})
 
         expect(files[0].hash).toBe('hashExample')
 
