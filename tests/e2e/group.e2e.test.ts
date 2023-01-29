@@ -5,6 +5,8 @@ const dirTree = require("directory-tree");
 import { DirTree } from '../utils/dirTree';
 
 import { parseArgs } from '../../src/parseArgs'
+import { cli } from '../../src/common/cli';
+const errorSpied = jest.spyOn(cli, 'error').mockImplementation()
 
 const folderStructure = {
     'video.mp4': '',
@@ -18,10 +20,10 @@ const folderStructureOnlyFolders = {
 
 describe('group by date', () => {
 
-    it('moves files under a <dd-mm-yyyy> folder', () => withLocalTmpDir(async () => {
+    it('moves files under a <YYYY-MM-DD> folder', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        await parseArgs(['', '', 'group', '-d'])
+        await parseArgs(['', '', 'group', '-d', 'YYYY-MM-DD'])
 
         const tree: DirTree = dirTree(process.cwd(), { attributes: ['type'] });
 
@@ -31,6 +33,35 @@ describe('group by date', () => {
         const date = new Date()
         expect(dateFolder.name).toBe(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
         expect(dateFolder.children).toHaveLength(2)
+    }))
+
+    it('moves files under a <YYYY/MM/DD> folder structure', () => withLocalTmpDir(async () => {
+        await outputFiles(folderStructure)
+
+        await parseArgs(['', '', 'group', '-d', 'YYYY//MM//DD'])
+
+        const tree: DirTree = dirTree(process.cwd(), { attributes: ['type'] });
+
+        expect(tree.children).toHaveLength(1)
+
+        const yearFolder = tree.children[0]
+        const date = new Date()
+        expect(yearFolder.name).toBe(`${date.getFullYear()}`)
+
+        const monthFolder = yearFolder.children[0]
+        expect(monthFolder.name).toBe(`${date.getMonth() + 1}`)
+
+        const dayFolder = monthFolder.children[0]
+        expect(dayFolder.name).toBe(`${date.getDate()}`)
+
+    }))
+
+    it('shows an error when date format does not have any of YYYY MM or DD', () => withLocalTmpDir(async () => {
+        
+        await parseArgs(['', '', 'group', '-d', 'invalidFormat'])
+
+        expect(errorSpied).toHaveBeenCalledWith('Error: Date parameter string must contain YYYY, MM or DD')
+
     }))
 })
 
@@ -60,7 +91,7 @@ describe('group by multiple options', () => {
     it('groups in the order given filetype/date/file', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        await parseArgs(['', '', 'group', '-e', '-d'])
+        await parseArgs(['', '', 'group', '-e', '-d', 'YYYY-MM-DD'])
 
         const tree: DirTree = dirTree(process.cwd(), { attributes: ['type'] });
 
@@ -83,7 +114,7 @@ describe('group by multiple options', () => {
     it('groups in the order given date/filetype/file', () => withLocalTmpDir(async () => {
         await outputFiles(folderStructure)
 
-        await parseArgs(['', '', 'group', '-d', '-e'])
+        await parseArgs(['', '', 'group', '-d', 'YYYY-MM-DD', '-e'])
 
         const tree: DirTree = dirTree(process.cwd(), { attributes: ['type'] });
 
