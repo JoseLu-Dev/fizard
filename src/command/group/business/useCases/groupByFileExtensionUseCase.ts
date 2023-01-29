@@ -9,7 +9,7 @@ export class GroupByFileExtensionUseCase {
 
     constructor(private readonly _mimeType: MimeType) { }
 
-    group(files: Array<FileWrapper>): void {
+    group(files: Array<FileWrapper>, arg: string): void {
 
         files.forEach(file => {
             this._moveFileToItsFolder(file)

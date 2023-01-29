@@ -46,8 +46,8 @@ export class GroupFiles extends CommandComplete {
 
         type ObjectKey = keyof typeof this.options
 
-        for (const option in options) {
-            this.options[option as ObjectKey].group(files)
+        for (const [option, value] of Object.entries(options)){
+            this.options[option as ObjectKey].group(files, value)
         }
     }
 }

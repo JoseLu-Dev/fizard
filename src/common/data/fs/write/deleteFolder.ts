@@ -11,9 +11,9 @@ export class DeleteFolder {
         }
         catch (e) {
             if (e instanceof Error) {
-                return cli.error(`Error deleting folder: "${filePath}" : ${e.message}`)
+                return cli.error(`Error deleting folder: "${filePath}" : ${e.message}`, e)
             }
-            cli.error(`${e}`)
+            cli.error(`Error deleting folder: "${filePath}" : ${e}`, new Error(`${e}`))
         }
     }
 

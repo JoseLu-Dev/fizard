@@ -11,10 +11,10 @@ export class CalculateFileHash {
         }
         catch (e) {
             if (e instanceof Error) {
-                cli.error(`Error calculating checksum of file: "${dir}" : ${e.message}`)
+                cli.error(`Error calculating checksum of file: "${dir}" : ${e.message}`, e)
                 return ''
             }
-            cli.error(`${e}`)
+            cli.error(`Error calculating checksum of file: "${dir}" : ${e}`, new Error(`${e}`))
             return ''
         }
     }
