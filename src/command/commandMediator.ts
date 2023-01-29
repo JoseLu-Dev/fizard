@@ -3,6 +3,7 @@ import { Service } from 'typedi'
 import { DestructureCommandDescription } from './destructure/presentation/destructureCommandDescription';
 import { StructureCommandDescription } from './structure/presentation/structureCommandDescription';
 import { GroupCommandDescription } from './group/presentation/groupCommandDescription';
+import { FindDuplicatesCommandDescription } from './findDuplicates/presentation/findDuplicatesCommandDescription';
 
 @Service()
 export class CommandMediator {
@@ -11,6 +12,7 @@ export class CommandMediator {
         private readonly _groupCommandDescription: GroupCommandDescription,
         private readonly _destructureCommandDescription: DestructureCommandDescription,
         private readonly _structureCommandDescription: StructureCommandDescription,
+        private readonly _findDuplicatesCommandDescription: FindDuplicatesCommandDescription,
     ) { }
 
     /**
@@ -24,6 +26,6 @@ export class CommandMediator {
         this._groupCommandDescription.apply(program, executionPath)
         this._destructureCommandDescription.apply(program, executionPath)
         this._structureCommandDescription.apply(program, executionPath)
-
+        this._findDuplicatesCommandDescription.apply(program, executionPath)
     }
 }
