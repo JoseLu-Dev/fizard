@@ -60,7 +60,7 @@ describe('group by date', () => {
         
         await parseArgs(['', '', 'group', '-d', 'invalidFormat'])
 
-        expect(errorSpied).toHaveBeenCalledWith('Error: Date parameter string must contain YYYY, MM or DD')
+        expect(errorSpied).toHaveBeenCalledWith('Error: Date parameter string must contain YYYY, MM or DD', new Error('Date parameter string must contain YYYY, MM or DD'))
 
     }))
 })
