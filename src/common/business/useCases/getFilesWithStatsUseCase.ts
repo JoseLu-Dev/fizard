@@ -28,14 +28,16 @@ export class GetFilesWithStatsUseCase {
 
     private async _getListRecursive(dir: string, recursive?: boolean): Promise<Array<FileWrapper>>{
         const allFiles: FileWrapper[] = []
-
+        
         let fileNames: Array<string> = await this._listFilesUnderDirectory.list(dir)
-
+        
         for (const fileName of fileNames) {
             let file: FileWrapper = await this._getWholeFileWrapper(dir, fileName)
-
-            if (recursive && file.stats?.isDirectory()) {
-                allFiles.push(...await this._getListRecursive(file.pathCurrentComplete(), recursive))
+            
+            if (recursive && file.stats?.isDirectory() && !file.stats?.isSymbolicLink()) {
+                (await this._getListRecursive(file.pathCurrentComplete(), recursive)).forEach(file=>{
+                    allFiles.push(file)
+                })
             }
 
             allFiles.push(file)
