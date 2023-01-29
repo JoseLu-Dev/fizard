@@ -125,7 +125,7 @@ or
 ## Roadmap
 
 - [x] Add Changelog
-- [ ] Add command to find duplicate files
+- [x] Add command to find duplicate files
 - [ ] Add option to see a command historic
 - [ ] Add command to revert previous commands
 
