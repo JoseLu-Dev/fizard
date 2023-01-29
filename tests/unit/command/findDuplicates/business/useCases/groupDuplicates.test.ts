@@ -1,4 +1,4 @@
-import { GroupDuplicateFiles } from '../../../../../../src/command/findDuplicates/business/useCases/groupDuplicates';
+import { GroupDuplicateFiles } from '../../../../../../src/command/findDuplicates/business/useCases/groupDuplicateFiles';
 import { FileWrapper } from '../../../../../../src/common/business/fileWrapper';
 
 
