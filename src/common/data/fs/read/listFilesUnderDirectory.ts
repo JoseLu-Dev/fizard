@@ -11,10 +11,10 @@ export class ListFilesUnderDirectory {
         }
         catch (e) {
             if (e instanceof Error) {
-                cli.error(`Error listing files under dir: "${dir}" : ${e.message}`)
+                cli.error(`Error listing files under dir: "${dir}" : ${e.message}`, e)
                 return []
             }
-            cli.error(`${e}`)
+            cli.error(`Error listing files under dir: "${dir}" : ${e}`, new Error(`${e}`))
             return []
         }
     }

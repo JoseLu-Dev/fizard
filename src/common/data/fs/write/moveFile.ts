@@ -6,14 +6,14 @@ import { cli } from '../../../cli'
 export class MoveFile {
 
     async move(pathCurrent: string, pathNew: string): Promise<void> {
-        try{
+        try {
             return await fse.move(pathCurrent, pathNew)
         }
-        catch(e){
-            if(e instanceof Error){
-                return cli.error(`Error moving "${pathCurrent}" to "${pathNew}" : ${e.message}`)
+        catch (e) {
+            if (e instanceof Error) {
+                return cli.error(`Error moving "${pathCurrent}" to "${pathNew}" : ${e.message}`, e)
             }
-            cli.error(`${e}`)
+            cli.error(`Error moving "${pathCurrent}" to "${pathNew}"`, new Error(`${e}`))
         }
     }
 
