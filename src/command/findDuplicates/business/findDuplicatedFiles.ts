@@ -9,6 +9,7 @@ import { CalculateFilesHash } from "./useCases/calculateFilesHash"
 import { GroupDuplicateFiles } from "./useCases/groupDuplicateFiles"
 import { cli } from '../../../common/cli';
 import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
+import { FindDuplicatesOptions } from './findDuplicatesOptions';
 
 @Service()
 export class FindDuplicatedFiles extends CommandReadProcess {
@@ -38,22 +39,30 @@ export class FindDuplicatedFiles extends CommandReadProcess {
 
         const hashFilesDict: Record<string, FileWrapper[]> = this._groupDuplicateFiles.group(files)
 
-        this._printDuplicates(hashFilesDict)
+        const deleteDuplicates = (options.specificOptions as FindDuplicatesOptions).deleteDuplicates
+        this._checkDuplicates(hashFilesDict, deleteDuplicates)
 
         cli.loadingEnd()
+
+        if(deleteDuplicates) await this._write(files)
+
         return []
     }
 
-    private _printDuplicates(hashFilesDict: Record<string, FileWrapper[]>) {
+    private _checkDuplicates(hashFilesDict: Record<string, FileWrapper[]>, deleteDuplicates?: boolean) {
 
         Object.entries(hashFilesDict).forEach(dictEntry => {
 
             if (dictEntry[1].length <= 1) return
 
-            cli.info(`Files with hash ${dictEntry[0]}`)
+            if (!deleteDuplicates) cli.info(`Files with hash ${dictEntry[0]}`)
 
-            dictEntry[1].forEach(file => {
+            dictEntry[1].forEach((file, index) => {
 
+                if(deleteDuplicates && index > 0){
+                    file.isDeletedMarked = true
+                    return
+                }
                 cli.info(`${file.pathCurrentComplete()}`)
             })
         })

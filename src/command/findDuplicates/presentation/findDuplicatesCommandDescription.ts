@@ -7,7 +7,7 @@ import { FindDuplicatesOptions } from '../business/findDuplicatesOptions'
 export class FindDuplicatesCommandDescription {
 
     constructor(
-        private readonly _groupFiles: FindDuplicatedFiles,
+        private readonly _findDuplicatedFiles: FindDuplicatedFiles,
     ) { }
 
     /**
@@ -19,9 +19,9 @@ export class FindDuplicatesCommandDescription {
         program
             .command('findDuplicates')
             .summary('Finds duplicate files')
-            //.option('-d, --delete-duplicates', 'Delete duplicated files')
+            .option('-d, --delete-duplicates', 'Delete duplicated files')
             .action((options: FindDuplicatesOptions) => {
-                return this._groupFiles.execute({ path: executionPath, specificOptions: options, findOptions: { recursive: true } })
+                return this._findDuplicatedFiles.execute({ path: executionPath, specificOptions: options, findOptions: { recursive: true } })
             })
 
     }
