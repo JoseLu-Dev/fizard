@@ -20,14 +20,6 @@ export const config: log4js.Config = {
         type: "pattern",
         pattern: "[%d{yyyy-MM-dd hh:mm:ss:SSS}] [%p] %f{1}:%l - %m"
       }
-    },
-    debug: {
-      type: "file",
-      filename: logsFolder + "/file-cli/debug.log",
-      layout: {
-        type: "pattern",
-        pattern: "[%d{yyyy-MM-dd hh:mm:ss:SSS}] [%p] %f{1}:%l - %m"
-      }
     }
   },
   categories: {
@@ -43,13 +35,6 @@ export const config: log4js.Config = {
         "console"
       ],
       level: "INFO"
-    },
-    debug: {
-      appenders: [
-        "debug"
-      ],
-      level: "TRACE",
-      enableCallStack: true
     }
   }
 }
