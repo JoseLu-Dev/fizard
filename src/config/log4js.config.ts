@@ -13,7 +13,7 @@ export const config: log4js.Config = {
     },
     app: {
       type: "file",
-      filename: logsFolder + "/file-cli/app.log",
+      filename: logsFolder + "/fizard/app.log",
       maxLogSize: 10485760,
       numBackups: 3,
       layout: {

@@ -26,6 +26,6 @@
     2. **structure** - creates a structure of folders with a given structure
     3. **destructure** - removes all folder structure and moves all files where the command is executed
 
-[0.1.0]: https://github.com/JoseLu-Dev/file-cli/compare/v0.0.0...v0.1.0
-[0.1.1]: https://github.com/JoseLu-Dev/file-cli/compare/v0.1.0...v0.1.1
-[0.2.0]: https://github.com/JoseLu-Dev/file-cli/compare/v0.1.1...v0.2.0
+[0.1.0]: https://github.com/JoseLu-Dev/fizard/compare/v0.0.0...v0.1.0
+[0.1.1]: https://github.com/JoseLu-Dev/fizard/compare/v0.1.0...v0.1.1
+[0.2.0]: https://github.com/JoseLu-Dev/fizard/compare/v0.1.1...v0.2.0
