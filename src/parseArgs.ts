@@ -4,6 +4,7 @@ import { Container } from 'typedi'
 
 import { CommandMediator } from './command/commandMediator'
 import { cli } from './common/cli';
+import { ErrorControlled } from './common/errors';
 
 export async function parseArgs(argv: string[]): Promise<void> {
 
@@ -18,11 +19,19 @@ export async function parseArgs(argv: string[]): Promise<void> {
   Container.get(CommandMediator).mediate(program)
 
   try {
+
     await program.parseAsync(argv)
+
   } catch (e) {
+
+    if (e instanceof ErrorControlled) {
+      return cli.warn(e.message)
+    }
+
     if (e instanceof Error) {
       return cli.error(`${e}`, e)
     }
+
     cli.error(`${e}`, new Error(`${e}`))
   }
 

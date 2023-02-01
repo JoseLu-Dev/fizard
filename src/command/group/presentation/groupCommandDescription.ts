@@ -1,6 +1,7 @@
 import { Command } from '@commander-js/extra-typings'
 import { Service } from 'typedi'
 import { GroupFiles } from '../business/groupFiles'
+import { ErrorControlled } from '../../../common/errors';
 
 @Service()
 export class GroupCommandDescription {
@@ -38,8 +39,8 @@ export class GroupCommandDescription {
 
     private _validateDateCreated(dateCreated: string | boolean | [] | string[]) {
         if (dateCreated == undefined) return
-        if (typeof dateCreated != 'string') throw new Error('Type of dateCreated param is not valid')
-        if (!dateCreated.match(this.dateFormatRegex)) throw new Error('Date parameter string must contain YYYY, MM or DD')
+        if (typeof dateCreated != 'string') throw new ErrorControlled('Type of dateCreated param is not valid')
+        if (!dateCreated.match(this.dateFormatRegex)) throw new ErrorControlled('Date format parameter string must contain YYYY, MM or DD')
     }
 
 }
