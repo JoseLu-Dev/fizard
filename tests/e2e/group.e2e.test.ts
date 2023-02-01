@@ -6,6 +6,7 @@ import { DirTree } from '../utils/dirTree';
 
 import { parseArgs } from '../../src/parseArgs'
 import { cli } from '../../src/common/cli';
+import { ErrorControlled } from '../../src/common/errors';
 const errorSpied = jest.spyOn(cli, 'error').mockImplementation()
 
 const folderStructure = {
@@ -60,7 +61,7 @@ describe('group by date', () => {
         
         await parseArgs(['', '', 'group', '-d', 'invalidFormat'])
 
-        expect(errorSpied).toHaveBeenCalledWith('Error: Date parameter string must contain YYYY, MM or DD', new Error('Date parameter string must contain YYYY, MM or DD'))
+        expect(errorSpied).toHaveBeenCalledWith('Error: Date format parameter string must contain YYYY, MM or DD', new ErrorControlled('Date format parameter string must contain YYYY, MM or DD'))
 
     }))
 })

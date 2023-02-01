@@ -15,6 +15,14 @@ const writeComputedFiles = new WriteComputedFilesUseCase(
     { delete: deleteFolderMock }
 )
 
+beforeEach(() => {
+    createDirMock.mockReset()
+    createFileMock.mockReset()
+    moveFileMock.mockReset()
+    deleteFileMock.mockReset()
+    deleteFolderMock.mockReset()
+})
+
 describe('write', () => {
 
     it('calls moves files', async () => {
@@ -42,6 +50,22 @@ describe('write', () => {
 
         expect(moveFileMock).toHaveBeenCalledWith('current1', 'new1')
         expect(moveFileMock).toHaveBeenCalledWith('current2', 'new2')
+    })
+
+    it('does not call move files if pathCurrent and pathNew are the same', async () => {
+        const files: FileWrapper[] = [
+            {
+                pathCurrentComplete: () => 'same',
+                pathNewComplete: () => 'same',
+                stats: {
+                    isFile: () => true
+                }
+            }
+        ] as FileWrapper[]
+
+        await writeComputedFiles.write(files, () => { })
+
+        expect(moveFileMock).not.toHaveBeenCalled()
     })
 
     it('calls create files', async () => {

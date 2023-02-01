@@ -5,6 +5,10 @@
 ### Added
 - Command to find duplicated files **findDuplicates**
 
+### Changed
+- Added format parameter to group by date option
+- Controlled errors are now shown as [WARN] on logs
+
 ### Fixed
 - Error when reading a directory with lots of files
 
