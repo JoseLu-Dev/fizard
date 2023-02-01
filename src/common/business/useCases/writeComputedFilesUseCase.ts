@@ -34,7 +34,7 @@ export class WriteComputedFilesUseCase {
             return this._delete(file)
         }
 
-        if (!file.isNew)
+        if (!file.isNew && file.pathCurrentComplete() !== file.pathNewComplete())
             return this._moveFile.move(file.pathCurrentComplete(), file.pathNewComplete())
 
         if (file?.stats?.isFile())
