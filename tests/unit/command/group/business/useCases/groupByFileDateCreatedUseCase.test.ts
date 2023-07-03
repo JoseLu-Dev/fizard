@@ -17,9 +17,23 @@ describe('group', () => {
             })
         ]
 
-        groupByFileExtension.group(files)
+        groupByFileExtension.group(files, 'YYYY-MM-DD')
 
-        expect(files[0].pathNewComplete()).toBe(path.join('downloads','2022-11-3','example.mp4'))
+        expect(files[0].pathNewComplete()).toBe(path.join('downloads', '2022-11-3', 'example.mp4'))
+    })
+
+    it('moves files to a year//month//day folder', async () => {
+
+        const files: FileWrapper[] = [
+            new FileWrapper({
+                pathCurrent: 'downloads', name: 'example.mp4',
+                stats: { mtime: new Date(2022, 10, 3) } as Stats
+            })
+        ]
+
+        groupByFileExtension.group(files, 'YYYY//MM//DD')
+
+        expect(files[0].pathNewComplete()).toBe(path.join('downloads', '2022', '11', '3', 'example.mp4'))
     })
 
     it('moves files to a no-date when FileWrapper has no stats', async () => {
@@ -28,9 +42,9 @@ describe('group', () => {
             new FileWrapper({ pathCurrent: 'downloads', name: 'example.mp4' })
         ]
 
-        groupByFileExtension.group(files)
+        groupByFileExtension.group(files, '')
 
-        expect(files[0].pathNewComplete()).toBe(path.join('downloads','no-date','example.mp4'))
+        expect(files[0].pathNewComplete()).toBe(path.join('downloads', 'no-date', 'example.mp4'))
     })
 
 })

@@ -11,9 +11,9 @@ export class CreateDir {
         }
         catch (e) {
             if (e instanceof Error) {
-                return cli.error(`Error creating folder: "${dir}" : ${e.message}`)
+                return cli.error(`Error creating folder: "${dir}" : ${e.message}`, e)
             }
-            cli.error(`${e}`)
+            cli.error(`Error creating folder: "${dir}" : ${e}`, new Error(`${e}`))
         }
     }
 

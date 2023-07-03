@@ -68,8 +68,8 @@ class Cli {
         this.logCli({ logLevel: LogLevel.WARN, log: log })
     }
 
-    error(log: string) {
-        this.loggerFile.error(log)
+    error(log: string, error: Error) {
+        this.loggerFile.error(`${log} \n${error.stack}`)
         this.logCli({ logLevel: LogLevel.ERROR, log: log })
     }
 
@@ -143,7 +143,7 @@ class Cli {
 
     loadingStart(total: number, processName: string) {
         this.isLoading = true
-        this.loading.start(total, 0, {processName: processName})
+        this.loading.start(total, 0, { processName: processName })
     }
 
     loadingUpdate(progress: number) {

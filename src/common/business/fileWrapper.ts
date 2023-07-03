@@ -11,6 +11,8 @@ export class FileWrapper {
 
     stats?: Stats
 
+    hash?: string
+
     constructor(params: { pathCurrent: string, name: string, isNew?: boolean, stats?: Stats }) {
         this.pathCurrent = params.pathCurrent
         this.pathNew = params.pathCurrent

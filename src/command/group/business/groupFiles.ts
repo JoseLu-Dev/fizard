@@ -9,6 +9,7 @@ import { FileWrapper } from "../../../common/business/fileWrapper"
 import { FileWrapperFilter } from "../../../common/business/filters/fileWrapperFilter"
 import { CommandComplete } from "../../../common/business/command/commandComplete"
 import { CommandOptions } from "../../../common/business/command/commandOptions"
+import { ErrorControlled } from '../../../common/errors';
 
 @Service()
 export class GroupFiles extends CommandComplete {
@@ -33,7 +34,7 @@ export class GroupFiles extends CommandComplete {
 
     protected _process(files: FileWrapper[], options: CommandOptions): Promise<FileWrapper[]> {
 
-        if(!options.specificOptions) throw new Error('No group options provided')
+        if(!options.specificOptions) throw new ErrorControlled('No group options provided')
 
         files = this._fileWrapperFilter.removeDirs(files)
 
@@ -46,8 +47,8 @@ export class GroupFiles extends CommandComplete {
 
         type ObjectKey = keyof typeof this.options
 
-        for (const option in options) {
-            this.options[option as ObjectKey].group(files)
+        for (const [option, value] of Object.entries(options)){
+            this.options[option as ObjectKey].group(files, value)
         }
     }
 }

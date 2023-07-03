@@ -13,17 +13,9 @@ export const config: log4js.Config = {
     },
     app: {
       type: "file",
-      filename: logsFolder + "/file-cli/app.log",
+      filename: logsFolder + "/fizard/app.log",
       maxLogSize: 10485760,
       numBackups: 3,
-      layout: {
-        type: "pattern",
-        pattern: "[%d{yyyy-MM-dd hh:mm:ss:SSS}] [%p] %f{1}:%l - %m"
-      }
-    },
-    debug: {
-      type: "file",
-      filename: logsFolder + "/file-cli/debug.log",
       layout: {
         type: "pattern",
         pattern: "[%d{yyyy-MM-dd hh:mm:ss:SSS}] [%p] %f{1}:%l - %m"
@@ -43,13 +35,6 @@ export const config: log4js.Config = {
         "console"
       ],
       level: "INFO"
-    },
-    debug: {
-      appenders: [
-        "debug"
-      ],
-      level: "TRACE",
-      enableCallStack: true
     }
   }
 }

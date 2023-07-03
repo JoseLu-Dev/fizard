@@ -17,9 +17,9 @@
     A cli program to manage files and folders 
     <br />
     <br />
-    <a href="https://github.com/JoseLu-Dev/file-cli/issues">Report Bug</a>
+    <a href="https://github.com/JoseLu-Dev/fizard/issues">Report Bug</a>
     ·
-    <a href="https://github.com/JoseLu-Dev/file-cli/issues">Request Feature</a>
+    <a href="https://github.com/JoseLu-Dev/fizard/issues">Request Feature</a>
   </p>
 </div>
 
@@ -124,12 +124,12 @@ or
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add Changelog
-- [ ] Add command to find duplicate files
+- [x] Add Changelog
+- [x] Add command to find duplicate files
 - [ ] Add option to see a command historic
 - [ ] Add command to revert previous commands
 
-See the [open issues](https://github.com/JoseLu-Dev/file-cli/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/JoseLu-Dev/fizard/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -154,18 +154,18 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 JoseLu - joseludev@gmail.com
 
-Project Link: [https://github.com/JoseLu-Dev/file-cli](https://github.com/JoseLu-Dev/file-cli/)
+Project Link: [https://github.com/JoseLu-Dev/fizard](https://github.com/JoseLu-Dev/fizard/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/JoseLu-Dev/file-cli.svg?style=for-the-badge
-[contributors-url]: https://github.com/JoseLu-Dev/file-cli/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/JoseLu-Dev/file-cli.svg?style=for-the-badge
-[forks-url]: https://github.com/JoseLu-Dev/file-cli/network/members
-[stars-shield]: https://img.shields.io/github/stars/JoseLu-Dev/file-cli.svg?style=for-the-badge
-[stars-url]: https://github.com/JoseLu-Dev/file-cli/stargazers
-[issues-shield]: https://img.shields.io/github/issues/JoseLu-Dev/file-cli.svg?style=for-the-badge
-[issues-url]: https://github.com/JoseLu-Dev/file-cli/issues
+[contributors-shield]: https://img.shields.io/github/contributors/JoseLu-Dev/fizard.svg?style=for-the-badge
+[contributors-url]: https://github.com/JoseLu-Dev/fizard/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/JoseLu-Dev/fizard.svg?style=for-the-badge
+[forks-url]: https://github.com/JoseLu-Dev/fizard/network/members
+[stars-shield]: https://img.shields.io/github/stars/JoseLu-Dev/fizard.svg?style=for-the-badge
+[stars-url]: https://github.com/JoseLu-Dev/fizard/stargazers
+[issues-shield]: https://img.shields.io/github/issues/JoseLu-Dev/fizard.svg?style=for-the-badge
+[issues-url]: https://github.com/JoseLu-Dev/fizard/issues

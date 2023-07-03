@@ -1,5 +1,5 @@
 import { SpecificOptions } from '../../../common/business/command/commandOptions';
 export interface GroupOptions extends SpecificOptions{
-    dateCreated?: true | undefined
+    dateCreated?: string | boolean
     extension?: true | undefined
 }
